@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "010"
-               BuildableName = "IdleClicker.app"
-               BlueprintName = "IdleClicker"
-               ReferencedContainer = "container:IdleClicker.xcodeproj">
+               BlueprintIdentifier = "020"
+               BuildableName = "SheepFarm.app"
+               BlueprintName = "SheepFarm"
+               ReferencedContainer = "container:SheepFarm.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -43,10 +43,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "010"
-            BuildableName = "IdleClicker.app"
-            BlueprintName = "IdleClicker"
-            ReferencedContainer = "container:IdleClicker.xcodeproj">
+            BlueprintIdentifier = "020"
+            BuildableName = "SheepFarm.app"
+            BlueprintName = "SheepFarm"
+            ReferencedContainer = "container:SheepFarm.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -60,10 +60,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "010"
-            BuildableName = "IdleClicker.app"
-            BlueprintName = "IdleClicker"
-            ReferencedContainer = "container:IdleClicker.xcodeproj">
+            BlueprintIdentifier = "020"
+            BuildableName = "SheepFarm.app"
+            BlueprintName = "SheepFarm"
+            ReferencedContainer = "container:SheepFarm.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

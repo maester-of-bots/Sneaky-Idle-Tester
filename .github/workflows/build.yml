@@ -15,10 +15,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
     
-    - name: List available Xcode versions
-      run: ls /Applications/ | grep Xcode
-    
-    - name: Show default Xcode version
+    - name: Show Xcode version
       run: xcodebuild -version
     
     - name: Show directory structure
@@ -27,8 +24,8 @@ jobs:
     - name: Build app for simulator
       run: |
         xcodebuild \
-          -project IdleClicker.xcodeproj \
-          -scheme IdleClicker \
+          -project SheepFarm.xcodeproj \
+          -scheme SheepFarm \
           -sdk iphonesimulator \
           -configuration Debug \
           -derivedDataPath DerivedData \
@@ -37,8 +34,8 @@ jobs:
     - name: Build IPA for device
       run: |
         xcodebuild \
-          -project IdleClicker.xcodeproj \
-          -scheme IdleClicker \
+          -project SheepFarm.xcodeproj \
+          -scheme SheepFarm \
           -sdk iphoneos \
           -configuration Release \
           -derivedDataPath DerivedData \
@@ -51,18 +48,18 @@ jobs:
       run: |
         cd DerivedData/Build/Products/Release-iphoneos
         mkdir Payload
-        cp -r IdleClicker.app Payload/
-        zip -r IdleClicker.ipa Payload
+        cp -r SheepFarm.app Payload/
+        zip -r SheepFarm.ipa Payload
         rm -rf Payload
     
     - name: Upload IPA
       uses: actions/upload-artifact@v4
       with:
-        name: IdleClicker-IPA
-        path: DerivedData/Build/Products/Release-iphoneos/IdleClicker.ipa
+        name: SheepFarm-IPA
+        path: DerivedData/Build/Products/Release-iphoneos/SheepFarm.ipa
         
     - name: Upload App Bundle
       uses: actions/upload-artifact@v4
       with:
-        name: IdleClicker-App
-        path: DerivedData/Build/Products/Release-iphoneos/IdleClicker.app
+        name: SheepFarm-App
+        path: DerivedData/Build/Products/Release-iphoneos/SheepFarm.app

@@ -1,99 +1,90 @@
-# Idle Clicker Game - iOS
+# 🐑 Fjallabær Sheep Farm - iOS Edition
 
-A simple idle/incremental game for iOS built with SwiftUI.
+An Icelandic idle farming game converted from web to iOS using SwiftUI!
 
-## Game Mechanics
+## Features
 
-- Tap the blue circle to increment the counter by 1
-- Every second, the counter auto-increments by 0.001 times its current value
-- Numbers format automatically (K for thousands, M for millions)
+- **Choose your region** - Start your farm in one of 6 Icelandic locations, each with different difficulty and bonuses
+- **10 sheep tiers** - Unlock increasingly powerful sheep breeds
+- **5 upgrade categories** - Improve your farm's production
+- **Dynamic weather** - Weather affects your production
+- **Wool processing** - Turn raw wool into valuable products
+- **Automation** - Enable auto-sell and auto-process
+- **Save/Load** - Your progress is automatically saved
+- **Import/Export** - Transfer your save between devices
 
-## How to Build (Without a Mac)
+## How to Build
 
-This project uses GitHub Actions to build on macOS runners for free!
+### With GitHub Actions (No Mac Required!)
 
-### Step 1: Push to GitHub
+1. Fork or upload this repo to GitHub
+2. Go to Actions tab
+3. The workflow will build automatically
+4. Download the IPA from Artifacts
+5. Sideload with Sideloadly or AltStore
 
-1. Create a new GitHub repository
-2. Push this code:
-```bash
-git init
-git add .
-git commit -m "Initial commit"
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git
-git push -u origin main
-```
+### With Xcode (If you have a Mac)
 
-### Step 2: Wait for Build
+1. Open `SheepFarm.xcodeproj` in Xcode
+2. Select your device/simulator
+3. Click Run (⌘R)
 
-1. Go to your repo on GitHub
-2. Click "Actions" tab
-3. Watch the build run (takes 3-5 minutes)
-4. When it's done, click on the workflow run
-5. Scroll down to "Artifacts"
-6. Download "IdleClicker-IPA"
-
-### Step 3: Sideload with Sideloadly
-
-1. Extract the downloaded ZIP
-2. Open Sideloadly
-3. Connect your iPhone
-4. Drag the .ipa file into Sideloadly
-5. Enter your Apple ID
-6. Click "Start"
-
-## Project Structure
+## Game Structure
 
 ```
-IdleClicker/
-├── .github/
-│   └── workflows/
-│       └── build.yml          # GitHub Actions build script
-├── IdleClicker/
-│   ├── ContentView.swift      # Main game UI
-│   └── IdleClickerApp.swift   # App entry point
-└── IdleClicker.xcodeproj/
-    └── project.pbxproj        # Xcode project config
+SheepFarm/
+├── SheepFarmApp.swift       # Main app entry
+├── ContentView.swift         # Root view
+├── Models.swift              # Data models
+├── GameManager.swift         # Game logic
+├── StartScreenView.swift     # Region selection
+├── MainGameView.swift        # Main game UI
+└── Views.swift               # Sheep list, upgrades, settings
 ```
 
-## Customization Ideas
+## Gameplay
 
-Want to expand this? Here are some ideas:
+1. **Start** - Choose your name and region
+2. **Click** - Tap the shear button to collect wool
+3. **Sell** - Sell wool for currency (Krónur)
+4. **Buy Sheep** - Purchase better sheep breeds
+5. **Upgrade** - Buy upgrades to boost production
+6. **Process** - Unlock processing to create valuable products
+7. **Automate** - Enable automation for idle income
 
-- Add upgrades (increase per-tap amount)
-- Add different buttons with different effects
-- Save progress using UserDefaults
-- Add animations and particle effects
-- Implement prestige/reset mechanics
-- Add background music
-- **Add ads** (Google AdMob, Unity Ads)
+## Differences from Web Version
 
-## Adding Ads (Future)
+- **Mobile-optimized UI** - Tabs instead of 3-column layout
+- **Touch-friendly** - Larger buttons and better spacing
+- **Simplified Iceland map** - Button-based region selection instead of SVG
+- **Core gameplay intact** - All main mechanics preserved
+- **10 sheep tiers** - Simplified from 29 for mobile experience
+- **5 key upgrades** - Focused on core progression
 
-To monetize later:
-1. Sign up for Google AdMob
-2. Add the AdMob SDK
-3. Implement banner/interstitial ads
-4. Test with test ad units first!
+## Future Features
 
-## Free Minutes on GitHub Actions
+- More sheep tiers
+- More upgrades
+- Achievements
+- Prestige system
+- Sound effects
+- Animations
+- iCloud sync
 
-- Free tier: 2,000 minutes/month
-- macOS runners use 10x multiplier
-- So you get ~200 minutes of macOS time
-- Each build takes ~3-5 minutes
-- = ~40-60 builds per month for free
+## Building for App Store
 
-## Notes
+To publish to the App Store, you'll need:
+1. Apple Developer account ($99/year)
+2. Proper code signing
+3. App icons and screenshots
+4. Privacy policy
+5. App Store Connect setup
 
-- The IPA built by GitHub Actions won't be signed for App Store
-- Perfect for sideloading and testing
-- To publish to App Store, you'll need:
-  - Apple Developer account ($99/year)
-  - Proper code signing
-  - App Store Connect setup
+## Credits
+
+Original web game concept adapted for iOS.
+Built with SwiftUI and ❤️ for idle game fans!
 
 ## License
 
-Do whatever you want with this! It's yours now.
+Feel free to use, modify, and learn from this code!

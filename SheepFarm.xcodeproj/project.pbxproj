@@ -7,18 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		001 /* IdleClickerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002 /* IdleClickerApp.swift */; };
+		001 /* SheepFarmApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002 /* SheepFarmApp.swift */; };
 		003 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004 /* ContentView.swift */; };
+		005 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006 /* Models.swift */; };
+		007 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008 /* GameManager.swift */; };
+		009 /* StartScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010 /* StartScreenView.swift */; };
+		011 /* MainGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012 /* MainGameView.swift */; };
+		013 /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014 /* Views.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		005 /* IdleClicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IdleClicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		002 /* IdleClickerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdleClickerApp.swift; sourceTree = "<group>"; };
+		015 /* SheepFarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SheepFarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		002 /* SheepFarmApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheepFarmApp.swift; sourceTree = "<group>"; };
 		004 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		006 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		008 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
+		010 /* StartScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenView.swift; sourceTree = "<group>"; };
+		012 /* MainGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGameView.swift; sourceTree = "<group>"; };
+		014 /* Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		006 /* Frameworks */ = {
+		016 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -28,27 +38,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		007 = {
+		017 = {
 			isa = PBXGroup;
 			children = (
-				008 /* IdleClicker */,
-				009 /* Products */,
+				018 /* SheepFarm */,
+				019 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		008 /* IdleClicker */ = {
+		018 /* SheepFarm */ = {
 			isa = PBXGroup;
 			children = (
-				002 /* IdleClickerApp.swift */,
+				002 /* SheepFarmApp.swift */,
 				004 /* ContentView.swift */,
+				006 /* Models.swift */,
+				008 /* GameManager.swift */,
+				010 /* StartScreenView.swift */,
+				012 /* MainGameView.swift */,
+				014 /* Views.swift */,
 			);
-			path = IdleClicker;
+			path = SheepFarm;
 			sourceTree = "<group>";
 		};
-		009 /* Products */ = {
+		019 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				005 /* IdleClicker.app */,
+				015 /* SheepFarm.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -56,39 +71,39 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		010 /* IdleClicker */ = {
+		020 /* SheepFarm */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 011 /* Build configuration list for PBXNativeTarget "IdleClicker" */;
+			buildConfigurationList = 021 /* Build configuration list for PBXNativeTarget "SheepFarm" */;
 			buildPhases = (
-				012 /* Sources */,
-				006 /* Frameworks */,
-				013 /* Resources */,
+				022 /* Sources */,
+				016 /* Frameworks */,
+				023 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = IdleClicker;
-			productName = IdleClicker;
-			productReference = 005 /* IdleClicker.app */;
+			name = SheepFarm;
+			productName = SheepFarm;
+			productReference = 015 /* SheepFarm.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		014 /* Project object */ = {
+		024 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
-					010 = {
+					020 = {
 						CreatedOnToolsVersion = 15.0;
 					};
 				};
 			};
-			buildConfigurationList = 015 /* Build configuration list for PBXProject "IdleClicker" */;
+			buildConfigurationList = 025 /* Build configuration list for PBXProject "SheepFarm" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -96,18 +111,18 @@
 				en,
 				Base,
 			);
-			mainGroup = 007;
-			productRefGroup = 009 /* Products */;
+			mainGroup = 017;
+			productRefGroup = 019 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				010 /* IdleClicker */,
+				020 /* SheepFarm */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		013 /* Resources */ = {
+		023 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -117,19 +132,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		012 /* Sources */ = {
+		022 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				003 /* ContentView.swift in Sources */,
-				001 /* IdleClickerApp.swift in Sources */,
+				001 /* SheepFarmApp.swift in Sources */,
+				005 /* Models.swift in Sources */,
+				007 /* GameManager.swift in Sources */,
+				009 /* StartScreenView.swift in Sources */,
+				011 /* MainGameView.swift in Sources */,
+				013 /* Views.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		016 /* Debug */ = {
+		026 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -192,7 +212,7 @@
 			};
 			name = Debug;
 		};
-		017 /* Release */ = {
+		027 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -248,7 +268,7 @@
 			};
 			name = Release;
 		};
-		018 /* Debug */ = {
+		028 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -269,7 +289,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.yourname.IdleClicker;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourname.SheepFarm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -277,7 +297,7 @@
 			};
 			name = Debug;
 		};
-		019 /* Release */ = {
+		029 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -298,7 +318,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.yourname.IdleClicker;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourname.SheepFarm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -309,25 +329,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		011 /* Build configuration list for PBXNativeTarget "IdleClicker" */ = {
+		021 /* Build configuration list for PBXNativeTarget "SheepFarm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				018 /* Debug */,
-				019 /* Release */,
+				028 /* Debug */,
+				029 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		015 /* Build configuration list for PBXProject "IdleClicker" */ = {
+		025 /* Build configuration list for PBXProject "SheepFarm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				016 /* Debug */,
-				017 /* Release */,
+				026 /* Debug */,
+				027 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 014 /* Project object */;
+	rootObject = 024 /* Project object */;
 }
