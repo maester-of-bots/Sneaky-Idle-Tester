@@ -57,8 +57,10 @@ struct ContentView: View {
             return String(format: "%.2fM", num / 1000000)
         } else if num >= 1000 {
             return String(format: "%.2fK", num / 1000)
+        } else if num >= 1 {
+            return String(format: "%.2f", num)
         } else {
-            return String(format: "%.0f", num)
+            return String(format: "%.4f", num)
         }
     }
 }
