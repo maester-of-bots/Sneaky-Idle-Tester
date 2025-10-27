@@ -28,6 +28,7 @@ if (Test-Path $nested) {
 
 # Remove existing SheepFarm and SheepFarm.xcodeproj from destination
 $removeTargets = @("SheepFarm", "SheepFarm.xcodeproj")
+
 foreach ($target in $removeTargets) {
     $targetPath = Join-Path $dest $target
     if (Test-Path $targetPath) {
