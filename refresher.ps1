@@ -20,9 +20,16 @@ Expand-Archive -Path $zipPath -DestinationPath $extractPath -Force
 Remove-Item $zipPath -Force
 
 # Handle nested SheepFarm folder
+# Handle nested SheepFarm folder safely
 $nested = Join-Path $extractPath "SheepFarm"
 if (Test-Path $nested) {
-    Get-ChildItem -Path $nested -Force | Move-Item -Destination $extractPath -Force
+    Get-ChildItem -Path $nested -Force | ForEach-Object {
+        $destPath = Join-Path $extractPath $_.Name
+        if (Test-Path $destPath) {
+            Remove-Item $destPath -Recurse -Force
+        }
+        Move-Item -Path $_.FullName -Destination $extractPath -Force
+    }
     Remove-Item $nested -Recurse -Force
 }
 
