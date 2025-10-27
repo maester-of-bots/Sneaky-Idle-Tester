@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import Combine
 
 class GameManager: ObservableObject {
     @Published var gameState: GameState
@@ -8,11 +9,16 @@ class GameManager: ObservableObject {
     private var gameTimer: Timer?
     private var weatherTimer: Timer?
     private var saveTimer: Timer?
+    private var cancellables = Set<AnyCancellable>()
     
     private let costMultiplier = 1.75
     
     init() {
         self.gameState = GameState()
+        // Forward gameState changes to trigger UI updates
+        gameState.objectWillChange.sink { [weak self] in
+            self?.objectWillChange.send()
+        }.store(in: &cancellables)
         loadGame()
     }
     
@@ -104,6 +110,7 @@ class GameManager: ObservableObject {
         
         gameState.wool += clickPower
         gameState.totalClicks += 1
+        print("🐑 Click! +\(clickPower) wool (Total: \(gameState.wool.formatNumber()))")
     }
     
     // MARK: - Buy Sheep
@@ -127,9 +134,6 @@ class GameManager: ObservableObject {
         
         print("✅ Bought \(tier.name)! Count: \(newCount), Remaining kr: \(gameState.currency)")
         
-        // Force UI update
-        objectWillChange.send()
-        
         saveGame()
     }
     
@@ -150,6 +154,7 @@ class GameManager: ObservableObject {
         let sellValue = gameState.wool * 10.0
         gameState.currency += sellValue
         gameState.wool = 0
+        print("💰 Sold wool for \(sellValue.formatCurrency())")
         saveGame()
     }
     
@@ -167,6 +172,7 @@ class GameManager: ObservableObject {
         
         gameState.wool -= woolUsed
         gameState.products += productsCreated
+        print("🧵 Processed \(woolUsed) wool into \(productsCreated) products")
         saveGame()
     }
     
@@ -175,6 +181,7 @@ class GameManager: ObservableObject {
         let sellValue = Double(gameState.products) * 500.0
         gameState.currency += sellValue
         gameState.products = 0
+        print("👕 Sold products for \(sellValue.formatCurrency())")
         saveGame()
     }
     
@@ -197,6 +204,7 @@ class GameManager: ObservableObject {
             }
         }
         
+        print("🔧 Upgraded \(upgrade.name) to level \(currentLevel + 1)")
         saveGame()
     }
     
@@ -270,6 +278,10 @@ class GameManager: ObservableObject {
         if let data = UserDefaults.standard.data(forKey: "icelandicSheepGame"),
            let decoded = try? JSONDecoder().decode(GameState.self, from: data) {
             self.gameState = decoded
+            // Re-setup the binding for the loaded state
+            gameState.objectWillChange.sink { [weak self] in
+                self?.objectWillChange.send()
+            }.store(in: &cancellables)
             self.showStartScreen = false
             startGameLoops()
         }
@@ -278,6 +290,11 @@ class GameManager: ObservableObject {
     func resetGame() {
         UserDefaults.standard.removeObject(forKey: "icelandicSheepGame")
         gameState = GameState()
+        // Re-setup the binding for the new state
+        cancellables.removeAll()
+        gameState.objectWillChange.sink { [weak self] in
+            self?.objectWillChange.send()
+        }.store(in: &cancellables)
         showStartScreen = true
         stopGameLoops()
     }
@@ -294,6 +311,11 @@ class GameManager: ObservableObject {
         if let data = jsonString.data(using: .utf8),
            let decoded = try? JSONDecoder().decode(GameState.self, from: data) {
             self.gameState = decoded
+            // Re-setup the binding for the imported state
+            cancellables.removeAll()
+            gameState.objectWillChange.sink { [weak self] in
+                self?.objectWillChange.send()
+            }.store(in: &cancellables)
             saveGame()
         }
     }

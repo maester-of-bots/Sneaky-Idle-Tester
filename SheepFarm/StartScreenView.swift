@@ -12,101 +12,115 @@ struct StartScreenView: View {
                           endPoint: .bottomTrailing)
                 .ignoresSafeArea()
             
-            ScrollView {
-                VStack(spacing: 20) {
-                    Text("🐑 Choose Your Farm Location 🐑")
-                        .font(.system(size: 28, weight: .bold))
-                        .foregroundColor(Color(hex: "2c5f2d"))
-                        .multilineTextAlignment(.center)
-                        .padding()
-                    
-                    Text("Fjallabær Sheep Farm")
-                        .font(.title2.bold())
-                        .foregroundColor(Color(hex: "2F4F4F"))
-                    
-                    // Regions
-                    VStack(spacing: 15) {
-                        ForEach(Region.all, id: \.id) { region in
-                            RegionButton(region: region,
-                                       isSelected: selectedRegion?.id == region.id) {
-                                selectedRegion = region
-                            }
-                        }
-                    }
-                    .padding()
-                    
-                    // Selected region info
-                    if let region = selectedRegion {
-                        VStack(spacing: 12) {
-                            Text("\(region.name) - \(region.difficulty)")
-                                .font(.title3.bold())
-                                .foregroundColor(Color(hex: "2c5f2d"))
-                            
-                            Text(region.description)
-                                .font(.body)
-                                .foregroundColor(Color(hex: "2F4F4F"))
-                                .multilineTextAlignment(.center)
-                            
-                            VStack(spacing: 8) {
-                                HStack {
-                                    Text("Starting Currency:")
-                                        .foregroundColor(Color(hex: "1a1a1a"))
-                                    Spacer()
-                                    Text("\(Int(region.startingCurrency)) kr")
-                                        .bold()
-                                        .foregroundColor(Color(hex: "000000"))
-                                }
-                                HStack {
-                                    Text("Weather Bonus:")
-                                        .foregroundColor(Color(hex: "1a1a1a"))
-                                    Spacer()
-                                    Text("×\(String(format: "%.1f", region.weatherBonus))")
-                                        .bold()
-                                        .foregroundColor(Color(hex: "000000"))
-                                }
-                                HStack {
-                                    Text("Production Bonus:")
-                                        .foregroundColor(Color(hex: "1a1a1a"))
-                                    Spacer()
-                                    Text("×\(String(format: "%.1f", region.productionBonus))")
-                                        .bold()
-                                        .foregroundColor(Color(hex: "000000"))
-                                }
-                            }
-                            .font(.subheadline)
+            ScrollViewReader { proxy in
+                ScrollView {
+                    VStack(spacing: 20) {
+                        Text("🐑 Choose Your Farm Location 🐑")
+                            .font(.system(size: 28, weight: .bold))
+                            .foregroundColor(Color(hex: "2c5f2d"))
+                            .multilineTextAlignment(.center)
                             .padding()
-                            .background(Color.white)
-                            .cornerRadius(10)
-                            
-                            // Name input
-                            TextField("Enter your name", text: $farmerName)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .padding(.horizontal)
-                            
-                            // Start button
-                            Button(action: {
-                                if !farmerName.isEmpty && selectedRegion != nil {
-                                    gameManager.startGame(farmerName: farmerName, region: region)
+                        
+                        Text("Fjallabær Sheep Farm")
+                            .font(.title2.bold())
+                            .foregroundColor(Color(hex: "2F4F4F"))
+                        
+                        // Regions
+                        VStack(spacing: 15) {
+                            ForEach(Region.all, id: \.id) { region in
+                                RegionButton(region: region,
+                                           isSelected: selectedRegion?.id == region.id) {
+                                    selectedRegion = region
+                                    // Auto-scroll to selected region details
+                                    withAnimation {
+                                        proxy.scrollTo("regionDetails", anchor: .bottom)
+                                    }
                                 }
-                            }) {
-                                Text("Start Farming!")
-                                    .font(.headline)
-                                    .foregroundColor(.white)
-                                    .frame(maxWidth: .infinity)
-                                    .padding()
-                                    .background(farmerName.isEmpty ? Color.gray : Color(hex: "228b22"))
-                                    .cornerRadius(10)
                             }
-                            .disabled(farmerName.isEmpty)
-                            .padding(.horizontal)
                         }
                         .padding()
-                        .background(Color(hex: "f5f5dc"))
-                        .cornerRadius(15)
-                        .padding()
+                        
+                        // Selected region info
+                        if let region = selectedRegion {
+                            VStack(spacing: 12) {
+                                Text("\(region.name) - \(region.difficulty)")
+                                    .font(.title3.bold())
+                                    .foregroundColor(Color(hex: "2c5f2d"))
+                                
+                                Text(region.description)
+                                    .font(.body)
+                                    .foregroundColor(Color(hex: "2F4F4F"))
+                                    .multilineTextAlignment(.center)
+                                
+                                VStack(spacing: 8) {
+                                    HStack {
+                                        Text("Starting Currency:")
+                                            .foregroundColor(Color(hex: "1a1a1a"))
+                                        Spacer()
+                                        Text("\(Int(region.startingCurrency)) kr")
+                                            .bold()
+                                            .foregroundColor(Color(hex: "000000"))
+                                    }
+                                    HStack {
+                                        Text("Weather Bonus:")
+                                            .foregroundColor(Color(hex: "1a1a1a"))
+                                        Spacer()
+                                        Text("×\(String(format: "%.1f", region.weatherBonus))")
+                                            .bold()
+                                            .foregroundColor(Color(hex: "000000"))
+                                    }
+                                    HStack {
+                                        Text("Production Bonus:")
+                                            .foregroundColor(Color(hex: "1a1a1a"))
+                                        Spacer()
+                                        Text("×\(String(format: "%.1f", region.productionBonus))")
+                                            .bold()
+                                            .foregroundColor(Color(hex: "000000"))
+                                    }
+                                }
+                                .font(.subheadline)
+                                .padding()
+                                .background(Color.white)
+                                .cornerRadius(10)
+                                
+                                // Name input - Fixed with white text
+                                TextField("Enter your name", text: $farmerName)
+                                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                                    .foregroundColor(.white)
+                                    .accentColor(.white)
+                                    .padding(.horizontal)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .stroke(Color.white.opacity(0.5), lineWidth: 2)
+                                            .padding(.horizontal)
+                                    )
+                                
+                                // Start button
+                                Button(action: {
+                                    if !farmerName.isEmpty && selectedRegion != nil {
+                                        gameManager.startGame(farmerName: farmerName, region: region)
+                                    }
+                                }) {
+                                    Text("Start Farming!")
+                                        .font(.headline)
+                                        .foregroundColor(.white)
+                                        .frame(maxWidth: .infinity)
+                                        .padding()
+                                        .background(farmerName.isEmpty ? Color.gray : Color(hex: "228b22"))
+                                        .cornerRadius(10)
+                                }
+                                .disabled(farmerName.isEmpty)
+                                .padding(.horizontal)
+                            }
+                            .padding()
+                            .background(Color(hex: "f5f5dc"))
+                            .cornerRadius(15)
+                            .padding()
+                            .id("regionDetails")
+                        }
+                        
+                        Spacer()
                     }
-                    
-                    Spacer()
                 }
             }
         }
