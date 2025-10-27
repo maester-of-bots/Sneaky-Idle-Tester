@@ -72,11 +72,6 @@ struct SheepTierRow: View {
                         .font(.caption)
                         .foregroundColor(Color(hex: "8B4513"))
                 }
-                
-                // Debug info
-                Text("💰 You have: \(Int(gameManager.gameState.currency)) kr")
-                    .font(.caption2)
-                    .foregroundColor(.purple)
             }
             
             Spacer()

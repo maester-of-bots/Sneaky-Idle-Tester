@@ -69,6 +69,23 @@ struct HeaderView: View {
                 .font(.subheadline)
                 .foregroundColor(.secondary)
             
+            // BIG CURRENCY DISPLAY
+            HStack {
+                Text("💰")
+                    .font(.title)
+                Text(gameManager.gameState.currency.formatCurrency())
+                    .font(.title.bold())
+                    .foregroundColor(Color(hex: "1a1a1a"))
+            }
+            .padding(.horizontal, 20)
+            .padding(.vertical, 10)
+            .background(Color(hex: "FFD700").opacity(0.3))
+            .cornerRadius(15)
+            .overlay(
+                RoundedRectangle(cornerRadius: 15)
+                    .stroke(Color(hex: "DAA520"), lineWidth: 2)
+            )
+            
             // Weather display
             HStack {
                 Text(gameManager.gameState.weather.emoji)
@@ -122,6 +139,23 @@ struct FarmView: View {
                     Text("Click to shear wool!")
                         .font(.subheadline.bold())
                         .foregroundColor(Color(hex: "2F4F4F"))
+                    
+                    // WOOL COUNTER
+                    VStack(spacing: 4) {
+                        Text("🧶 Wool Collected")
+                            .font(.caption.bold())
+                            .foregroundColor(Color(hex: "1a1a1a"))
+                        Text(gameManager.gameState.wool.formatNumber())
+                            .font(.title2.bold())
+                            .foregroundColor(Color(hex: "8B4513"))
+                    }
+                    .padding()
+                    .background(Color(hex: "FFF8DC"))
+                    .cornerRadius(10)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color(hex: "8B4513"), lineWidth: 2)
+                    )
                 }
                 .padding()
                 
@@ -130,7 +164,7 @@ struct FarmView: View {
                     // Sell Wool
                     ActionButton(
                         title: "🧶 Sell Raw Wool",
-                        subtitle: "Wool: \(gameManager.gameState.wool.formatNumber()) (worth \(Int(gameManager.gameState.wool * 10)) kr)",
+                        subtitle: "\(gameManager.gameState.wool.formatNumber()) wool = \((gameManager.gameState.wool * 10).formatNumber()) kr",
                         color: Color(hex: "DAA520"),
                         enabled: gameManager.gameState.wool >= 1.0
                     ) {
@@ -141,7 +175,7 @@ struct FarmView: View {
                     if gameManager.gameState.processingUnlocked {
                         ActionButton(
                             title: "🧵 Process Wool",
-                            subtitle: "Convert 100 wool → products",
+                            subtitle: "Convert \((floor(gameManager.gameState.wool / 100) * 100).formatNumber()) wool → products",
                             color: Color(hex: "8B4513"),
                             enabled: gameManager.gameState.wool >= 100
                         ) {
@@ -151,7 +185,7 @@ struct FarmView: View {
                         // Sell Products
                         ActionButton(
                             title: "👕 Sell Products",
-                            subtitle: "Products: \(gameManager.gameState.products) (worth \(gameManager.gameState.products * 500) kr)",
+                            subtitle: "\(gameManager.gameState.products) products = \((Double(gameManager.gameState.products) * 500).formatNumber()) kr",
                             color: Color(hex: "4682B4"),
                             enabled: gameManager.gameState.products > 0
                         ) {
@@ -199,11 +233,28 @@ struct StatsPanel: View {
                 .foregroundColor(Color(hex: "2F4F4F"))
                 .padding(.bottom, 4)
             
-            StatRow(label: "💰 Krónur", value: gameManager.gameState.currency.formatCurrency())
+            // Highlight production
+            HStack {
+                Text("⚡ Production:")
+                    .font(.subheadline.bold())
+                    .foregroundColor(Color(hex: "1a1a1a"))
+                Spacer()
+                Text(gameManager.getWoolPerSecond().formatNumber() + "/sec")
+                    .font(.subheadline.bold())
+                    .foregroundColor(Color(hex: "228B22"))
+            }
+            .padding(.vertical, 8)
+            .padding(.horizontal, 10)
+            .background(Color(hex: "90EE90").opacity(0.3))
+            .cornerRadius(6)
+            .overlay(
+                RoundedRectangle(cornerRadius: 6)
+                    .stroke(Color(hex: "228B22"), lineWidth: 2)
+            )
+            
             StatRow(label: "🐑 Total Sheep", value: "\(gameManager.getTotalSheep())")
             StatRow(label: "🧶 Raw Wool", value: gameManager.gameState.wool.formatNumber())
             StatRow(label: "👕 Products", value: "\(gameManager.gameState.products)")
-            StatRow(label: "Wool/sec", value: gameManager.getWoolPerSecond().formatNumber())
             StatRow(label: "Total Multiplier", value: "×\(String(format: "%.2f", gameManager.getTotalMultiplier()))")
             
             if gameManager.gameState.processingUnlocked {

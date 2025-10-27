@@ -77,7 +77,10 @@ class GameManager: ObservableObject {
         totalProduction *= (1.0 + Double(staffUpgrades) * 0.25)
         totalProduction *= (1.0 + Double(housingUpgrades) * 0.10)
         
-        gameState.wool += totalProduction
+        if totalProduction > 0 {
+            gameState.wool += totalProduction
+            print("🔄 Tick: +\(totalProduction.formatNumber()) wool (Total: \(gameState.wool.formatNumber()))")
+        }
         
         // Auto-actions
         if gameState.autoSellWool && gameState.wool >= 10 {
