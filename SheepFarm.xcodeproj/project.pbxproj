@@ -14,6 +14,7 @@
 		009 /* StartScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010 /* StartScreenView.swift */; };
 		011 /* MainGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012 /* MainGameView.swift */; };
 		013 /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014 /* Views.swift */; };
+		031 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 030 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		010 /* StartScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenView.swift; sourceTree = "<group>"; };
 		012 /* MainGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGameView.swift; sourceTree = "<group>"; };
 		014 /* Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
+		030 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 				010 /* StartScreenView.swift */,
 				012 /* MainGameView.swift */,
 				014 /* Views.swift */,
+				030 /* Assets.xcassets */,
 			);
 			path = SheepFarm;
 			sourceTree = "<group>";
@@ -126,6 +129,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				031 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
