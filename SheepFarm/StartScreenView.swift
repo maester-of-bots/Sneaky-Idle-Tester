@@ -21,8 +21,8 @@ struct StartScreenView: View {
                         .padding()
                     
                     Text("Fjallabær Sheep Farm")
-                        .font(.title2)
-                        .foregroundColor(.secondary)
+                        .font(.title2.bold())
+                        .foregroundColor(Color(hex: "2F4F4F"))
                     
                     // Regions
                     VStack(spacing: 15) {
@@ -44,32 +44,38 @@ struct StartScreenView: View {
                             
                             Text(region.description)
                                 .font(.body)
-                                .foregroundColor(.secondary)
+                                .foregroundColor(Color(hex: "2F4F4F"))
                                 .multilineTextAlignment(.center)
                             
                             VStack(spacing: 8) {
                                 HStack {
                                     Text("Starting Currency:")
+                                        .foregroundColor(Color(hex: "1a1a1a"))
                                     Spacer()
                                     Text("\(Int(region.startingCurrency)) kr")
                                         .bold()
+                                        .foregroundColor(Color(hex: "000000"))
                                 }
                                 HStack {
                                     Text("Weather Bonus:")
+                                        .foregroundColor(Color(hex: "1a1a1a"))
                                     Spacer()
                                     Text("×\(String(format: "%.1f", region.weatherBonus))")
                                         .bold()
+                                        .foregroundColor(Color(hex: "000000"))
                                 }
                                 HStack {
                                     Text("Production Bonus:")
+                                        .foregroundColor(Color(hex: "1a1a1a"))
                                     Spacer()
                                     Text("×\(String(format: "%.1f", region.productionBonus))")
                                         .bold()
+                                        .foregroundColor(Color(hex: "000000"))
                                 }
                             }
                             .font(.subheadline)
                             .padding()
-                            .background(Color.white.opacity(0.7))
+                            .background(Color.white)
                             .cornerRadius(10)
                             
                             // Name input
@@ -126,11 +132,11 @@ struct RegionButton: View {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(region.name)
-                        .font(.headline)
-                        .foregroundColor(.primary)
+                        .font(.headline.bold())
+                        .foregroundColor(Color(hex: "1a1a1a"))
                     Text(region.difficulty)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
+                        .font(.subheadline.bold())
+                        .foregroundColor(Color(hex: "333333"))
                 }
                 Spacer()
                 Circle()
@@ -138,7 +144,7 @@ struct RegionButton: View {
                     .frame(width: 30, height: 30)
             }
             .padding()
-            .background(isSelected ? Color.blue.opacity(0.2) : Color.white.opacity(0.8))
+            .background(isSelected ? Color.blue.opacity(0.3) : Color.white)
             .cornerRadius(12)
             .overlay(
                 RoundedRectangle(cornerRadius: 12)

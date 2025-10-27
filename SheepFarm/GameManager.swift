@@ -105,16 +105,27 @@ class GameManager: ObservableObject {
     
     // MARK: - Buy Sheep
     func buySheep(tier: SheepTier) {
-        guard canAffordSheep(tier) else { return }
-        guard isSheepUnlocked(tier) else { return }
+        guard canAffordSheep(tier) else { 
+            print("Cannot afford \(tier.name) - Need: \(gameState.sheepCosts[tier.id] ?? tier.baseCost), Have: \(gameState.currency)")
+            return 
+        }
+        guard isSheepUnlocked(tier) else { 
+            print("\(tier.name) is locked")
+            return 
+        }
         
         let cost = gameState.sheepCosts[tier.id] ?? tier.baseCost
         gameState.currency -= cost
         gameState.sheepCounts[tier.id, default: 0] += 1
         
         // Update cost for next purchase
-        let count = gameState.sheepCounts[tier.id] ?? 1
-        gameState.sheepCosts[tier.id] = tier.baseCost * pow(costMultiplier, Double(count))
+        let newCount = gameState.sheepCounts[tier.id] ?? 1
+        gameState.sheepCosts[tier.id] = tier.baseCost * pow(costMultiplier, Double(newCount))
+        
+        print("✅ Bought \(tier.name)! Count: \(newCount), Remaining kr: \(gameState.currency)")
+        
+        // Force UI update
+        objectWillChange.send()
         
         saveGame()
     }

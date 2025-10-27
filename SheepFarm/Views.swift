@@ -28,16 +28,16 @@ struct SheepTierRow: View {
         gameManager.isSheepUnlocked(tier)
     }
     
-    var canAfford: Bool {
-        gameManager.canAffordSheep(tier)
-    }
-    
     var cost: Double {
         gameManager.gameState.sheepCosts[tier.id] ?? tier.baseCost
     }
     
     var count: Int {
         gameManager.gameState.sheepCounts[tier.id] ?? 0
+    }
+    
+    var canAfford: Bool {
+        gameManager.gameState.currency >= cost && isUnlocked
     }
     
     var body: some View {
@@ -72,6 +72,11 @@ struct SheepTierRow: View {
                         .font(.caption)
                         .foregroundColor(Color(hex: "8B4513"))
                 }
+                
+                // Debug info
+                Text("💰 You have: \(Int(gameManager.gameState.currency)) kr")
+                    .font(.caption2)
+                    .foregroundColor(.purple)
             }
             
             Spacer()
@@ -81,18 +86,18 @@ struct SheepTierRow: View {
                 gameManager.buySheep(tier: tier)
             }) {
                 VStack(spacing: 2) {
-                    Text("Buy")
-                        .font(.caption.bold())
+                    Text("BUY")
+                        .font(.callout.bold())
                     Text(cost.formatCurrency())
-                        .font(.caption2)
+                        .font(.caption)
                 }
                 .foregroundColor(.white)
-                .padding(.horizontal, 12)
-                .padding(.vertical, 8)
-                .background(canAfford && isUnlocked ? Color(hex: "228B22") : Color.gray)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 10)
+                .background(canAfford ? Color(hex: "228B22") : Color.gray.opacity(0.5))
                 .cornerRadius(8)
             }
-            .disabled(!canAfford || !isUnlocked)
+            .disabled(!canAfford)
         }
         .padding()
         .background(
@@ -101,7 +106,7 @@ struct SheepTierRow: View {
         )
         .overlay(
             RoundedRectangle(cornerRadius: 12)
-                .stroke(canAfford && isUnlocked ? Color(hex: "4682B4") : Color.gray, lineWidth: 2)
+                .stroke(canAfford ? Color(hex: "32CD32") : Color.gray, lineWidth: canAfford ? 3 : 2)
         )
         .opacity(isUnlocked ? 1.0 : 0.6)
     }
