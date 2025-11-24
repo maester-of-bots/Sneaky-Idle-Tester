@@ -1,0 +1,101 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background - pastoral green gradient -->
+  <defs>
+    <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#98D98E;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grassGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#90C695;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6B9F7D;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Sky background -->
+  <rect width="1024" height="1024" fill="url(#skyGradient)"/>
+  
+  <!-- Hills/grass at bottom -->
+  <ellipse cx="512" cy="900" rx="600" ry="200" fill="url(#grassGradient)"/>
+  <ellipse cx="200" cy="850" rx="350" ry="150" fill="#7FB985"/>
+  <ellipse cx="800" cy="870" rx="400" ry="130" fill="#7FB985"/>
+  
+  <!-- Fence posts -->
+  <rect x="150" y="580" width="30" height="120" fill="#8B6F47" rx="5"/>
+  <rect x="350" y="580" width="30" height="120" fill="#8B6F47" rx="5"/>
+  <rect x="550" y="580" width="30" height="120" fill="#8B6F47" rx="5"/>
+  <rect x="750" y="580" width="30" height="120" fill="#8B6F47" rx="5"/>
+  <rect x="840" y="580" width="30" height="120" fill="#8B6F47" rx="5"/>
+  
+  <!-- Fence rails -->
+  <rect x="150" y="600" width="720" height="15" fill="#A0826D" rx="7"/>
+  <rect x="150" y="660" width="720" height="15" fill="#A0826D" rx="7"/>
+  
+  <!-- Cute sheep character (centered, large) -->
+  <!-- Sheep body (fluffy cloud shape) -->
+  <ellipse cx="512" cy="450" rx="180" ry="150" fill="#FFFFFF"/>
+  <circle cx="420" cy="400" r="80" fill="#FFFFFF"/>
+  <circle cx="604" cy="400" r="80" fill="#FFFFFF"/>
+  <circle cx="440" cy="500" r="70" fill="#FFFFFF"/>
+  <circle cx="584" cy="500" r="70" fill="#FFFFFF"/>
+  
+  <!-- Sheep head -->
+  <ellipse cx="512" cy="300" rx="90" ry="100" fill="#F5F5DC"/>
+  
+  <!-- Ears -->
+  <ellipse cx="450" cy="270" rx="35" ry="50" fill="#F5F5DC"/>
+  <ellipse cx="574" cy="270" rx="35" ry="50" fill="#F5F5DC"/>
+  <ellipse cx="450" cy="270" rx="25" ry="40" fill="#E8DCC0"/>
+  <ellipse cx="574" cy="270" rx="25" ry="40" fill="#E8DCC0"/>
+  
+  <!-- Eyes (cute and happy) -->
+  <ellipse cx="480" cy="300" rx="15" ry="20" fill="#2C2C2C"/>
+  <ellipse cx="544" cy="300" rx="15" ry="20" fill="#2C2C2C"/>
+  <circle cx="485" cy="295" r="6" fill="#FFFFFF"/>
+  <circle cx="549" cy="295" r="6" fill="#FFFFFF"/>
+  
+  <!-- Nose -->
+  <ellipse cx="512" cy="330" rx="12" ry="8" fill="#2C2C2C"/>
+  
+  <!-- Smile -->
+  <path d="M 490 345 Q 512 360 534 345" stroke="#2C2C2C" stroke-width="4" fill="none" stroke-linecap="round"/>
+  
+  <!-- Legs -->
+  <rect x="440" y="550" width="35" height="90" fill="#2C2C2C" rx="17"/>
+  <rect x="549" y="550" width="35" height="90" fill="#2C2C2C" rx="17"/>
+  <rect x="470" y="570" width="35" height="90" fill="#2C2C2C" rx="17"/>
+  <rect x="519" y="570" width="35" height="90" fill="#2C2C2C" rx="17"/>
+  
+  <!-- Hooves -->
+  <ellipse cx="457" cy="640" rx="22" ry="12" fill="#1C1C1C"/>
+  <ellipse cx="566" cy="640" rx="22" ry="12" fill="#1C1C1C"/>
+  <ellipse cx="487" cy="660" rx="22" ry="12" fill="#1C1C1C"/>
+  <ellipse cx="536" cy="660" rx="22" ry="12" fill="#1C1C1C"/>
+  
+  <!-- Wool ball floating (game mechanic hint) -->
+  <g transform="translate(780, 280)">
+    <circle cx="0" cy="0" r="70" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="-25" cy="-20" r="30" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="25" cy="-20" r="30" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="0" cy="30" r="35" fill="#FFFFFF" opacity="0.9"/>
+    <!-- Little sparkle -->
+    <circle cx="30" cy="-30" r="8" fill="#FFD700"/>
+    <circle cx="35" cy="-25" r="4" fill="#FFF"/>
+  </g>
+  
+  <!-- Currency coins (kr symbol) -->
+  <g transform="translate(220, 320)">
+    <circle cx="0" cy="0" r="50" fill="#FFD700" stroke="#DAA520" stroke-width="4"/>
+    <text x="0" y="15" font-family="Arial, sans-serif" font-size="50" font-weight="bold" fill="#8B6914" text-anchor="middle">kr</text>
+  </g>
+  
+  <!-- Small cloud decorations -->
+  <g opacity="0.7">
+    <ellipse cx="180" cy="150" rx="60" ry="35" fill="#FFFFFF"/>
+    <circle cx="160" cy="150" r="30" fill="#FFFFFF"/>
+    <circle cx="200" cy="145" r="25" fill="#FFFFFF"/>
+    
+    <ellipse cx="820" cy="200" rx="70" ry="40" fill="#FFFFFF"/>
+    <circle cx="800" cy="200" r="35" fill="#FFFFFF"/>
+    <circle cx="845" cy="195" r="30" fill="#FFFFFF"/>
+  </g>
+</svg>
