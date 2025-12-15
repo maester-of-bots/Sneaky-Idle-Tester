@@ -80,6 +80,29 @@ struct Upgrade: Identifiable, Codable {
     ]
 }
 
+// MARK: - Achievement
+struct Achievement: Identifiable, Codable {
+    let id: String
+    let name: String
+    let description: String
+    let requirement: Double
+    let requirementType: String // "sheep", "wool", "clicks", "upgrades", "tier"
+    let emoji: String
+    
+    static let allAchievements: [Achievement] = [
+        Achievement(id: "first_sheep", name: "First Flock", description: "Buy your first sheep", requirement: 1, requirementType: "sheep", emoji: "🐑"),
+        Achievement(id: "ten_sheep", name: "Growing Farm", description: "Own 10 total sheep", requirement: 10, requirementType: "sheep", emoji: "🐏"),
+        Achievement(id: "hundred_sheep", name: "Shepherd", description: "Own 100 total sheep", requirement: 100, requirementType: "sheep", emoji: "👨‍🌾"),
+        Achievement(id: "thousand_wool", name: "Wool Baron", description: "Collect 1,000 total wool", requirement: 1000, requirementType: "wool", emoji: "🧶"),
+        Achievement(id: "million_wool", name: "Wool Tycoon", description: "Collect 1,000,000 total wool", requirement: 1_000_000, requirementType: "wool", emoji: "💰"),
+        Achievement(id: "first_upgrade", name: "Improvement", description: "Buy your first upgrade", requirement: 1, requirementType: "upgrades", emoji: "🔧"),
+        Achievement(id: "hundred_clicks", name: "Dedicated Shearer", description: "Click 100 times", requirement: 100, requirementType: "clicks", emoji: "✂️"),
+        Achievement(id: "thousand_clicks", name: "Master Shearer", description: "Click 1,000 times", requirement: 1000, requirementType: "clicks", emoji: "✨"),
+        Achievement(id: "elite_sheep", name: "Elite Farmer", description: "Unlock Elite Sheep tier", requirement: 1, requirementType: "tier:elite", emoji: "👑"),
+        Achievement(id: "dragon_sheep", name: "Dragon Tamer", description: "Unlock Dragon Sheep tier", requirement: 1, requirementType: "tier:dragon", emoji: "🐉")
+    ]
+}
+
 // MARK: - Weather
 enum WeatherType: String, Codable {
     case pleasant, sunny, blizzard, storm, fog
@@ -119,10 +142,12 @@ enum WeatherType: String, Codable {
 class GameState: ObservableObject, Codable {
     @Published var currency: Double
     @Published var wool: Double
+    @Published var totalWoolEarned: Double  // For achievements
     @Published var products: Int
     @Published var sheepCounts: [String: Int]
     @Published var sheepCosts: [String: Double]
     @Published var upgradeLevels: [String: Int]
+    @Published var unlockedAchievements: Set<String>
     @Published var weather: WeatherType
     @Published var farmerName: String
     @Published var region: String
@@ -139,10 +164,12 @@ class GameState: ObservableObject, Codable {
     init() {
         self.currency = 0
         self.wool = 0
+        self.totalWoolEarned = 0
         self.products = 0
         self.sheepCounts = [:]
         self.sheepCosts = [:]
         self.upgradeLevels = [:]
+        self.unlockedAchievements = []
         self.weather = .pleasant
         self.farmerName = "Farmer"
         self.region = "reykjavik"
@@ -164,8 +191,8 @@ class GameState: ObservableObject, Codable {
     }
     
     enum CodingKeys: String, CodingKey {
-        case currency, wool, products, sheepCounts, sheepCosts, upgradeLevels
-        case weather, farmerName, region, totalClicks, processingUnlocked
+        case currency, wool, totalWoolEarned, products, sheepCounts, sheepCosts, upgradeLevels
+        case unlockedAchievements, weather, farmerName, region, totalClicks, processingUnlocked
         case autoSellWool, autoProcess, autoSellProducts
     }
     
@@ -173,10 +200,12 @@ class GameState: ObservableObject, Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         currency = try container.decode(Double.self, forKey: .currency)
         wool = try container.decode(Double.self, forKey: .wool)
+        totalWoolEarned = try container.decodeIfPresent(Double.self, forKey: .totalWoolEarned) ?? 0
         products = try container.decode(Int.self, forKey: .products)
         sheepCounts = try container.decode([String: Int].self, forKey: .sheepCounts)
         sheepCosts = try container.decode([String: Double].self, forKey: .sheepCosts)
         upgradeLevels = try container.decode([String: Int].self, forKey: .upgradeLevels)
+        unlockedAchievements = try container.decodeIfPresent(Set<String>.self, forKey: .unlockedAchievements) ?? []
         weather = try container.decode(WeatherType.self, forKey: .weather)
         farmerName = try container.decode(String.self, forKey: .farmerName)
         region = try container.decode(String.self, forKey: .region)
@@ -191,10 +220,12 @@ class GameState: ObservableObject, Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(currency, forKey: .currency)
         try container.encode(wool, forKey: .wool)
+        try container.encode(totalWoolEarned, forKey: .totalWoolEarned)
         try container.encode(products, forKey: .products)
         try container.encode(sheepCounts, forKey: .sheepCounts)
         try container.encode(sheepCosts, forKey: .sheepCosts)
         try container.encode(upgradeLevels, forKey: .upgradeLevels)
+        try container.encode(unlockedAchievements, forKey: .unlockedAchievements)
         try container.encode(weather, forKey: .weather)
         try container.encode(farmerName, forKey: .farmerName)
         try container.encode(region, forKey: .region)

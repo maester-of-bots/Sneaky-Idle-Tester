@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "020"
+               BlueprintIdentifier = "022"
                BuildableName = "SheepFarm.app"
                BlueprintName = "SheepFarm"
                ReferencedContainer = "container:SheepFarm.xcodeproj">
@@ -43,7 +43,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "020"
+            BlueprintIdentifier = "022"
             BuildableName = "SheepFarm.app"
             BlueprintName = "SheepFarm"
             ReferencedContainer = "container:SheepFarm.xcodeproj">
@@ -60,7 +60,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "020"
+            BlueprintIdentifier = "022"
             BuildableName = "SheepFarm.app"
             BlueprintName = "SheepFarm"
             ReferencedContainer = "container:SheepFarm.xcodeproj">

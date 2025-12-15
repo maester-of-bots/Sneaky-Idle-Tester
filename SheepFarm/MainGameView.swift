@@ -8,7 +8,7 @@ struct MainGameView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                LinearGradient(colors: [Color(hex: "87CEEB"), Color(hex: "E0F6FF"), Color(hex: "98FB98")],
+                LinearGradient(colors: [GameColors.skyBlue, GameColors.lightSky, GameColors.grass],
                               startPoint: .topLeading,
                               endPoint: .bottomTrailing)
                     .ignoresSafeArea()
@@ -22,6 +22,7 @@ struct MainGameView: View {
                         Text("Farm").tag(0)
                         Text("Sheep").tag(1)
                         Text("Upgrades").tag(2)
+                        Text("Achievements").tag(3)
                     }
                     .pickerStyle(SegmentedPickerStyle())
                     .padding()
@@ -36,9 +37,23 @@ struct MainGameView: View {
                         
                         UpgradesView(gameManager: gameManager)
                             .tag(2)
+                        
+                        AchievementsView(gameManager: gameManager)
+                            .tag(3)
                     }
                     .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                 }
+                
+                // Achievement notifications
+                VStack {
+                    Spacer()
+                    ForEach(gameManager.newAchievements) { achievement in
+                        AchievementNotification(achievement: achievement) {
+                            gameManager.dismissAchievement(achievement)
+                        }
+                    }
+                }
+                .padding()
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -56,6 +71,52 @@ struct MainGameView: View {
     }
 }
 
+struct AchievementNotification: View {
+    let achievement: Achievement
+    let onDismiss: () -> Void
+    @State private var isShowing = false
+    
+    var body: some View {
+        HStack(spacing: 12) {
+            Text(achievement.emoji)
+                .font(.system(size: 40))
+            
+            VStack(alignment: .leading, spacing: 4) {
+                Text("🏆 Achievement Unlocked!")
+                    .font(.caption.bold())
+                    .foregroundColor(.white)
+                Text(achievement.name)
+                    .font(.headline.bold())
+                    .foregroundColor(.white)
+                Text(achievement.description)
+                    .font(.caption)
+                    .foregroundColor(.white.opacity(0.9))
+            }
+            
+            Spacer()
+            
+            Button(action: onDismiss) {
+                Image(systemName: "xmark.circle.fill")
+                    .foregroundColor(.white.opacity(0.7))
+            }
+        }
+        .padding()
+        .background(
+            LinearGradient(colors: [GameColors.gold, GameColors.darkGold],
+                          startPoint: .leading,
+                          endPoint: .trailing)
+        )
+        .cornerRadius(15)
+        .shadow(radius: 10)
+        .offset(y: isShowing ? 0 : 200)
+        .onAppear {
+            withAnimation(.spring()) {
+                isShowing = true
+            }
+        }
+    }
+}
+
 struct HeaderView: View {
     @ObservedObject var gameManager: GameManager
     
@@ -63,7 +124,7 @@ struct HeaderView: View {
         VStack(spacing: 8) {
             Text("🐑 Fjallabær Sheep Farm 🐑")
                 .font(.title2.bold())
-                .foregroundColor(Color(hex: "2F4F4F"))
+                .foregroundColor(GameColors.darkGreen)
             
             Text(gameManager.gameState.farmerName + "'s Farm")
                 .font(.subheadline)
@@ -75,16 +136,40 @@ struct HeaderView: View {
                     .font(.title)
                 Text(gameManager.gameState.currency.formatCurrency())
                     .font(.title.bold())
-                    .foregroundColor(Color(hex: "1a1a1a"))
+                    .foregroundColor(GameColors.darkText)
             }
             .padding(.horizontal, 20)
             .padding(.vertical, 10)
-            .background(Color(hex: "FFD700").opacity(0.3))
+            .background(GameColors.gold.opacity(0.3))
             .cornerRadius(15)
             .overlay(
                 RoundedRectangle(cornerRadius: 15)
-                    .stroke(Color(hex: "DAA520"), lineWidth: 2)
+                    .stroke(GameColors.darkGold, lineWidth: 2)
             )
+            
+            // Production rate (prominently displayed)
+            let productionRate = gameManager.getWoolPerSecond()
+            if productionRate > 0 {
+                HStack(spacing: 6) {
+                    Text("⚡")
+                    Text(productionRate.formatCompact() + "/sec")
+                        .font(.subheadline.bold())
+                    if gameManager.woolGainThisSecond > 0 {
+                        Text("+\(gameManager.woolGainThisSecond.formatCompact())")
+                            .font(.caption.bold())
+                            .foregroundColor(GameColors.springGreen)
+                            .transition(.opacity)
+                    }
+                }
+                .padding(.horizontal, 12)
+                .padding(.vertical, 6)
+                .background(GameColors.springGreen.opacity(0.2))
+                .cornerRadius(8)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(GameColors.springGreen, lineWidth: 2)
+                )
+            }
             
             // Weather display
             HStack {
@@ -94,11 +179,11 @@ struct HeaderView: View {
             }
             .padding(.horizontal, 12)
             .padding(.vertical, 6)
-            .background(Color(hex: "E6F3FF"))
+            .background(GameColors.lightBlue)
             .cornerRadius(8)
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color(hex: "87CEEB"), lineWidth: 2)
+                    .stroke(GameColors.skyBlue, lineWidth: 2)
             )
         }
         .padding()
@@ -108,6 +193,7 @@ struct HeaderView: View {
 
 struct FarmView: View {
     @ObservedObject var gameManager: GameManager
+    @State private var isAnimating = false
     
     var body: some View {
         ScrollView {
@@ -115,46 +201,54 @@ struct FarmView: View {
                 // Stats panel
                 StatsPanel(gameManager: gameManager)
                 
-                // Sheep button
+                // Sheep button with animation
                 VStack(spacing: 10) {
                     Button(action: {
                         gameManager.clickSheep()
+                        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
+                            isAnimating = true
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            isAnimating = false
+                        }
                     }) {
                         ZStack {
                             Circle()
                                 .fill(
-                                    LinearGradient(colors: [Color(hex: "FFE4E1"), Color(hex: "FFF8DC")],
+                                    LinearGradient(colors: [Color(hex: "FFE4E1"), GameColors.wheat],
                                                  startPoint: .topLeading,
                                                  endPoint: .bottomTrailing)
                                 )
                                 .frame(width: 120, height: 120)
-                                .shadow(radius: 10)
+                                .shadow(radius: isAnimating ? 15 : 10)
                             
                             Text("✂️")
                                 .font(.system(size: 50))
+                                .rotationEffect(.degrees(isAnimating ? 20 : 0))
                         }
                     }
-                    .buttonStyle(ScaleButtonStyle())
+                    .buttonStyle(BounceButtonStyle())
+                    .scaleEffect(isAnimating ? 1.1 : 1.0)
                     
                     Text("Click to shear wool!")
                         .font(.subheadline.bold())
-                        .foregroundColor(Color(hex: "2F4F4F"))
+                        .foregroundColor(GameColors.darkGreen)
                     
                     // WOOL COUNTER
                     VStack(spacing: 4) {
                         Text("🧶 Wool Collected")
                             .font(.caption.bold())
-                            .foregroundColor(Color(hex: "1a1a1a"))
+                            .foregroundColor(GameColors.darkText)
                         Text(gameManager.gameState.wool.formatNumber())
                             .font(.title2.bold())
-                            .foregroundColor(Color(hex: "8B4513"))
+                            .foregroundColor(GameColors.brown)
                     }
                     .padding()
-                    .background(Color(hex: "FFF8DC"))
+                    .background(GameColors.wheat)
                     .cornerRadius(10)
                     .overlay(
                         RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color(hex: "8B4513"), lineWidth: 2)
+                            .stroke(GameColors.brown, lineWidth: 2)
                     )
                 }
                 .padding()
@@ -165,7 +259,7 @@ struct FarmView: View {
                     ActionButton(
                         title: "🧶 Sell Raw Wool",
                         subtitle: "\(gameManager.gameState.wool.formatNumber()) wool = \((gameManager.gameState.wool * 10).formatNumber()) kr",
-                        color: Color(hex: "DAA520"),
+                        color: GameColors.darkGold,
                         enabled: gameManager.gameState.wool >= 1.0
                     ) {
                         gameManager.sellWool()
@@ -176,7 +270,7 @@ struct FarmView: View {
                         ActionButton(
                             title: "🧵 Process Wool",
                             subtitle: "Convert \((floor(gameManager.gameState.wool / 100) * 100).formatNumber()) wool → products",
-                            color: Color(hex: "8B4513"),
+                            color: GameColors.brown,
                             enabled: gameManager.gameState.wool >= 100
                         ) {
                             gameManager.processWool()
@@ -186,7 +280,7 @@ struct FarmView: View {
                         ActionButton(
                             title: "👕 Sell Products",
                             subtitle: "\(gameManager.gameState.products) products = \((Double(gameManager.gameState.products) * 500).formatNumber()) kr",
-                            color: Color(hex: "4682B4"),
+                            color: GameColors.steelBlue,
                             enabled: gameManager.gameState.products > 0
                         ) {
                             gameManager.sellProducts()
@@ -200,14 +294,14 @@ struct FarmView: View {
                     VStack(alignment: .leading, spacing: 12) {
                         Text("🤖 Automation")
                             .font(.headline.bold())
-                            .foregroundColor(Color(hex: "2F4F4F"))
+                            .foregroundColor(GameColors.darkGreen)
                         
                         Toggle("Auto-sell Raw Wool", isOn: $gameManager.gameState.autoSellWool)
-                            .foregroundColor(Color(hex: "1a1a1a"))
+                            .foregroundColor(GameColors.darkText)
                         Toggle("Auto-process Wool", isOn: $gameManager.gameState.autoProcess)
-                            .foregroundColor(Color(hex: "1a1a1a"))
+                            .foregroundColor(GameColors.darkText)
                         Toggle("Auto-sell Products", isOn: $gameManager.gameState.autoSellProducts)
-                            .foregroundColor(Color(hex: "1a1a1a"))
+                            .foregroundColor(GameColors.darkText)
                     }
                     .padding()
                     .background(Color(hex: "fffaf2"))
@@ -230,18 +324,18 @@ struct StatsPanel: View {
         VStack(alignment: .leading, spacing: 8) {
             Text("📊 Farm Statistics")
                 .font(.headline.bold())
-                .foregroundColor(Color(hex: "2F4F4F"))
+                .foregroundColor(GameColors.darkGreen)
                 .padding(.bottom, 4)
             
             // Highlight production
             HStack {
                 Text("⚡ Production:")
                     .font(.subheadline.bold())
-                    .foregroundColor(Color(hex: "1a1a1a"))
+                    .foregroundColor(GameColors.darkText)
                 Spacer()
                 Text(gameManager.getWoolPerSecond().formatNumber() + "/sec")
                     .font(.subheadline.bold())
-                    .foregroundColor(Color(hex: "228B22"))
+                    .foregroundColor(GameColors.springGreen)
             }
             .padding(.vertical, 8)
             .padding(.horizontal, 10)
@@ -249,13 +343,14 @@ struct StatsPanel: View {
             .cornerRadius(6)
             .overlay(
                 RoundedRectangle(cornerRadius: 6)
-                    .stroke(Color(hex: "228B22"), lineWidth: 2)
+                    .stroke(GameColors.springGreen, lineWidth: 2)
             )
             
             StatRow(label: "🐑 Total Sheep", value: "\(gameManager.getTotalSheep())")
             StatRow(label: "🧶 Raw Wool", value: gameManager.gameState.wool.formatNumber())
             StatRow(label: "👕 Products", value: "\(gameManager.gameState.products)")
             StatRow(label: "Total Multiplier", value: "×\(String(format: "%.2f", gameManager.getTotalMultiplier()))")
+            StatRow(label: "🏆 Achievements", value: "\(gameManager.gameState.unlockedAchievements.count)/\(Achievement.allAchievements.count)")
             
             if gameManager.gameState.processingUnlocked {
                 let processingLevel = gameManager.gameState.upgradeLevels["processing"] ?? 0
@@ -263,11 +358,11 @@ struct StatsPanel: View {
             }
         }
         .padding()
-        .background(Color(hex: "F5F5DC"))
+        .background(GameColors.beige)
         .cornerRadius(12)
         .overlay(
             RoundedRectangle(cornerRadius: 12)
-                .stroke(Color(hex: "DEB887"), lineWidth: 2)
+                .stroke(GameColors.tan, lineWidth: 2)
         )
         .padding()
     }
@@ -281,11 +376,11 @@ struct StatRow: View {
         HStack {
             Text(label)
                 .font(.subheadline)
-                .foregroundColor(Color(hex: "1a1a1a"))
+                .foregroundColor(GameColors.darkText)
             Spacer()
             Text(value)
                 .font(.subheadline.bold())
-                .foregroundColor(Color(hex: "000000"))
+                .foregroundColor(.black)
         }
         .padding(.vertical, 6)
         .padding(.horizontal, 10)
@@ -316,14 +411,7 @@ struct ActionButton: View {
             .background(enabled ? color : Color.gray)
             .cornerRadius(10)
         }
+        .buttonStyle(BounceButtonStyle())
         .disabled(!enabled)
-    }
-}
-
-struct ScaleButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
-            .animation(.easeInOut(duration: 0.1), value: configuration.isPressed)
     }
 }

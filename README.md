@@ -2,6 +2,29 @@
 
 An Icelandic idle farming game converted from web to iOS using SwiftUI!
 
+## ✨ Recent Updates (v1.1)
+
+### 🎯 New Features
+- **Achievement System** - 10 achievements with progress tracking and notifications
+- **Visual Production Feedback** - See wool being produced in real-time
+- **Click Animations** - Satisfying bouncy feedback when shearing
+- **Progress Indicators** - Visual bars for upgrades and achievements
+
+### 🐛 Critical Fixes
+- Fixed invisible text field in region selection
+- Improved visual hierarchy throughout the app
+- Better button feedback and animations
+
+### 🎨 Visual Improvements
+- Centralized color system for consistency
+- Enhanced production stats display
+- Better achievement notifications
+- Improved UI polish and animations
+
+See [IMPROVEMENTS.md](IMPROVEMENTS.md) for detailed change log.
+
+---
+
 ## Features
 
 - **Choose your region** - Start your farm in one of 6 Icelandic locations, each with different difficulty and bonuses
@@ -10,6 +33,7 @@ An Icelandic idle farming game converted from web to iOS using SwiftUI!
 - **Dynamic weather** - Weather affects your production
 - **Wool processing** - Turn raw wool into valuable products
 - **Automation** - Enable auto-sell and auto-process
+- **Achievements** - Unlock 10 achievements as you progress
 - **Save/Load** - Your progress is automatically saved
 - **Import/Export** - Transfer your save between devices
 
@@ -35,11 +59,12 @@ An Icelandic idle farming game converted from web to iOS using SwiftUI!
 SheepFarm/
 ├── SheepFarmApp.swift       # Main app entry
 ├── ContentView.swift         # Root view
-├── Models.swift              # Data models
-├── GameManager.swift         # Game logic
+├── Models.swift              # Data models & achievements
+├── GameManager.swift         # Game logic & achievement tracking
+├── Utilities.swift           # Colors, formatters, button styles
 ├── StartScreenView.swift     # Region selection
-├── MainGameView.swift        # Main game UI
-└── Views.swift               # Sheep list, upgrades, settings
+├── MainGameView.swift        # Main game UI with tabs
+└── Views.swift               # Sheep list, upgrades, achievements, settings
 ```
 
 ## Gameplay
@@ -51,6 +76,20 @@ SheepFarm/
 5. **Upgrade** - Buy upgrades to boost production
 6. **Process** - Unlock processing to create valuable products
 7. **Automate** - Enable automation for idle income
+8. **Achieve** - Unlock achievements and track your progress
+
+## Achievements 🏆
+
+- 🐑 **First Flock** - Buy your first sheep
+- 🐏 **Growing Farm** - Own 10 total sheep
+- 👨‍🌾 **Shepherd** - Own 100 total sheep
+- 🧶 **Wool Baron** - Collect 1,000 total wool
+- 💰 **Wool Tycoon** - Collect 1,000,000 total wool
+- 🔧 **Improvement** - Buy your first upgrade
+- ✂️ **Dedicated Shearer** - Click 100 times
+- ✨ **Master Shearer** - Click 1,000 times
+- 👑 **Elite Farmer** - Unlock Elite Sheep tier
+- 🐉 **Dragon Tamer** - Unlock Dragon Sheep tier
 
 ## Differences from Web Version
 
@@ -60,16 +99,17 @@ SheepFarm/
 - **Core gameplay intact** - All main mechanics preserved
 - **10 sheep tiers** - Simplified from 29 for mobile experience
 - **5 key upgrades** - Focused on core progression
+- **Achievement system** - iOS-exclusive feature
+- **Visual polish** - Animations and improved feedback
 
 ## Future Features
 
-- More sheep tiers
-- More upgrades
-- Achievements
-- Prestige system
 - Sound effects
-- Animations
+- Prestige system
 - iCloud sync
+- More achievements
+- Seasonal events
+- Daily challenges
 
 ## Building for App Store
 

@@ -5,6 +5,8 @@ import Combine
 class GameManager: ObservableObject {
     @Published var gameState: GameState
     @Published var showStartScreen: Bool = true
+    @Published var newAchievements: [Achievement] = []  // For showing achievement popups
+    @Published var woolGainThisSecond: Double = 0  // For visual feedback
     
     private var gameTimer: Timer?
     private var weatherTimer: Timer?
@@ -85,7 +87,11 @@ class GameManager: ObservableObject {
         
         if totalProduction > 0 {
             gameState.wool += totalProduction
-            print("🔄 Tick: +\(totalProduction.formatNumber()) wool (Total: \(gameState.wool.formatNumber()))")
+            gameState.totalWoolEarned += totalProduction
+            woolGainThisSecond = totalProduction
+            
+            // Check achievements
+            checkAchievements()
         }
         
         // Auto-actions
@@ -109,20 +115,17 @@ class GameManager: ObservableObject {
         let clickPower = baseClick + Double(clickUpgrades)
         
         gameState.wool += clickPower
+        gameState.totalWoolEarned += clickPower
         gameState.totalClicks += 1
-        print("🐑 Click! +\(clickPower) wool (Total: \(gameState.wool.formatNumber()))")
+        
+        // Check achievements
+        checkAchievements()
     }
     
     // MARK: - Buy Sheep
     func buySheep(tier: SheepTier) {
-        guard canAffordSheep(tier) else { 
-            print("Cannot afford \(tier.name) - Need: \(gameState.sheepCosts[tier.id] ?? tier.baseCost), Have: \(gameState.currency)")
-            return 
-        }
-        guard isSheepUnlocked(tier) else { 
-            print("\(tier.name) is locked")
-            return 
-        }
+        guard canAffordSheep(tier) else { return }
+        guard isSheepUnlocked(tier) else { return }
         
         let cost = gameState.sheepCosts[tier.id] ?? tier.baseCost
         gameState.currency -= cost
@@ -132,7 +135,8 @@ class GameManager: ObservableObject {
         let newCount = gameState.sheepCounts[tier.id] ?? 1
         gameState.sheepCosts[tier.id] = tier.baseCost * pow(costMultiplier, Double(newCount))
         
-        print("✅ Bought \(tier.name)! Count: \(newCount), Remaining kr: \(gameState.currency)")
+        // Check achievements
+        checkAchievements()
         
         saveGame()
     }
@@ -154,7 +158,6 @@ class GameManager: ObservableObject {
         let sellValue = gameState.wool * 10.0
         gameState.currency += sellValue
         gameState.wool = 0
-        print("💰 Sold wool for \(sellValue.formatCurrency())")
         saveGame()
     }
     
@@ -172,7 +175,6 @@ class GameManager: ObservableObject {
         
         gameState.wool -= woolUsed
         gameState.products += productsCreated
-        print("🧵 Processed \(woolUsed) wool into \(productsCreated) products")
         saveGame()
     }
     
@@ -181,7 +183,6 @@ class GameManager: ObservableObject {
         let sellValue = Double(gameState.products) * 500.0
         gameState.currency += sellValue
         gameState.products = 0
-        print("👕 Sold products for \(sellValue.formatCurrency())")
         saveGame()
     }
     
@@ -204,7 +205,9 @@ class GameManager: ObservableObject {
             }
         }
         
-        print("🔧 Upgraded \(upgrade.name) to level \(currentLevel + 1)")
+        // Check achievements
+        checkAchievements()
+        
         saveGame()
     }
     
@@ -216,6 +219,52 @@ class GameManager: ObservableObject {
     func canAffordUpgrade(_ upgrade: Upgrade) -> Bool {
         let cost = getUpgradeCost(upgrade)
         return gameState.currency >= cost
+    }
+    
+    // MARK: - Achievements
+    func checkAchievements() {
+        let totalSheep = getTotalSheep()
+        let totalUpgrades = gameState.upgradeLevels.values.reduce(0, +)
+        
+        for achievement in Achievement.allAchievements {
+            // Skip if already unlocked
+            if gameState.unlockedAchievements.contains(achievement.id) {
+                continue
+            }
+            
+            var unlocked = false
+            
+            switch achievement.requirementType {
+            case "sheep":
+                unlocked = Double(totalSheep) >= achievement.requirement
+            case "wool":
+                unlocked = gameState.totalWoolEarned >= achievement.requirement
+            case "clicks":
+                unlocked = Double(gameState.totalClicks) >= achievement.requirement
+            case "upgrades":
+                unlocked = Double(totalUpgrades) >= achievement.requirement
+            case let type where type.starts(with: "tier:"):
+                let tierId = String(type.dropFirst(5))
+                let count = gameState.sheepCounts[tierId] ?? 0
+                unlocked = count >= Int(achievement.requirement)
+            default:
+                break
+            }
+            
+            if unlocked {
+                gameState.unlockedAchievements.insert(achievement.id)
+                newAchievements.append(achievement)
+                
+                // Auto-dismiss after 3 seconds
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+                    self?.newAchievements.removeAll { $0.id == achievement.id }
+                }
+            }
+        }
+    }
+    
+    func dismissAchievement(_ achievement: Achievement) {
+        newAchievements.removeAll { $0.id == achievement.id }
     }
     
     // MARK: - Weather
@@ -318,26 +367,5 @@ class GameManager: ObservableObject {
             }.store(in: &cancellables)
             saveGame()
         }
-    }
-}
-
-// MARK: - Formatting Helpers
-extension Double {
-    func formatNumber() -> String {
-        if self >= 1_000_000_000 {
-            return String(format: "%.2fB", self / 1_000_000_000)
-        } else if self >= 1_000_000 {
-            return String(format: "%.2fM", self / 1_000_000)
-        } else if self >= 1_000 {
-            return String(format: "%.2fK", self / 1_000)
-        } else if self >= 1 {
-            return String(format: "%.2f", self)
-        } else {
-            return String(format: "%.4f", self)
-        }
-    }
-    
-    func formatCurrency() -> String {
-        return self.formatNumber() + " kr"
     }
 }

@@ -1,5 +1,162 @@
 import SwiftUI
 
+// MARK: - Achievements View
+struct AchievementsView: View {
+    @ObservedObject var gameManager: GameManager
+    
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 12) {
+                Text("🏆 Achievements")
+                    .font(.title3.bold())
+                    .foregroundColor(GameColors.darkGreen)
+                    .padding()
+                
+                // Progress bar
+                let unlockedCount = gameManager.gameState.unlockedAchievements.count
+                let totalCount = Achievement.allAchievements.count
+                let progress = Double(unlockedCount) / Double(totalCount)
+                
+                VStack(spacing: 8) {
+                    HStack {
+                        Text("Progress")
+                            .font(.subheadline.bold())
+                        Spacer()
+                        Text("\(unlockedCount)/\(totalCount)")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+                    
+                    GeometryReader { geometry in
+                        ZStack(alignment: .leading) {
+                            Rectangle()
+                                .fill(Color.gray.opacity(0.3))
+                                .frame(height: 20)
+                                .cornerRadius(10)
+                            
+                            Rectangle()
+                                .fill(GameColors.gold)
+                                .frame(width: geometry.size.width * progress, height: 20)
+                                .cornerRadius(10)
+                        }
+                    }
+                    .frame(height: 20)
+                }
+                .padding()
+                .background(Color.white)
+                .cornerRadius(12)
+                .padding(.horizontal)
+                
+                // Achievement list
+                ForEach(Achievement.allAchievements) { achievement in
+                    AchievementRow(
+                        achievement: achievement,
+                        isUnlocked: gameManager.gameState.unlockedAchievements.contains(achievement.id),
+                        progress: getAchievementProgress(achievement: achievement)
+                    )
+                }
+            }
+            .padding()
+        }
+    }
+    
+    func getAchievementProgress(achievement: Achievement) -> Double {
+        let totalSheep = gameManager.getTotalSheep()
+        let totalUpgrades = gameManager.gameState.upgradeLevels.values.reduce(0, +)
+        
+        switch achievement.requirementType {
+        case "sheep":
+            return min(Double(totalSheep) / achievement.requirement, 1.0)
+        case "wool":
+            return min(gameManager.gameState.totalWoolEarned / achievement.requirement, 1.0)
+        case "clicks":
+            return min(Double(gameManager.gameState.totalClicks) / achievement.requirement, 1.0)
+        case "upgrades":
+            return min(Double(totalUpgrades) / achievement.requirement, 1.0)
+        case let type where type.starts(with: "tier:"):
+            let tierId = String(type.dropFirst(5))
+            let count = gameManager.gameState.sheepCounts[tierId] ?? 0
+            return count >= Int(achievement.requirement) ? 1.0 : 0.0
+        default:
+            return 0.0
+        }
+    }
+}
+
+struct AchievementRow: View {
+    let achievement: Achievement
+    let isUnlocked: Bool
+    let progress: Double
+    
+    var body: some View {
+        HStack(spacing: 12) {
+            // Emoji
+            Text(achievement.emoji)
+                .font(.system(size: 40))
+                .frame(width: 60, height: 60)
+                .background(isUnlocked ? GameColors.gold.opacity(0.3) : Color.gray.opacity(0.2))
+                .cornerRadius(10)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(isUnlocked ? GameColors.gold : Color.gray, lineWidth: 2)
+                )
+            
+            VStack(alignment: .leading, spacing: 4) {
+                Text(achievement.name)
+                    .font(.headline.bold())
+                    .foregroundColor(isUnlocked ? GameColors.darkText : .gray)
+                
+                Text(achievement.description)
+                    .font(.caption)
+                    .foregroundColor(GameColors.mediumText)
+                
+                if !isUnlocked && progress > 0 {
+                    HStack(spacing: 4) {
+                        GeometryReader { geometry in
+                            ZStack(alignment: .leading) {
+                                Rectangle()
+                                    .fill(Color.gray.opacity(0.2))
+                                    .frame(height: 6)
+                                    .cornerRadius(3)
+                                
+                                Rectangle()
+                                    .fill(GameColors.gold)
+                                    .frame(width: geometry.size.width * progress, height: 6)
+                                    .cornerRadius(3)
+                            }
+                        }
+                        .frame(height: 6)
+                        
+                        Text("\(Int(progress * 100))%")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                            .frame(width: 40)
+                    }
+                }
+            }
+            
+            Spacer()
+            
+            if isUnlocked {
+                Image(systemName: "checkmark.circle.fill")
+                    .foregroundColor(GameColors.springGreen)
+                    .font(.title2)
+            }
+        }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 12)
+                .fill(isUnlocked ? Color.white : Color.gray.opacity(0.1))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(isUnlocked ? GameColors.gold : Color.gray.opacity(0.3), lineWidth: isUnlocked ? 2 : 1)
+        )
+        .opacity(isUnlocked ? 1.0 : 0.7)
+    }
+}
+
+// MARK: - Sheep List View
 struct SheepListView: View {
     @ObservedObject var gameManager: GameManager
     
@@ -8,7 +165,7 @@ struct SheepListView: View {
             VStack(spacing: 12) {
                 Text("🐑 Sheep Breeds Available")
                     .font(.title3.bold())
-                    .foregroundColor(Color(hex: "2F4F4F"))
+                    .foregroundColor(GameColors.darkGreen)
                     .padding()
                 
                 ForEach(SheepTier.allTiers) { tier in
@@ -53,16 +210,21 @@ struct SheepTierRow: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(tier.name)
                     .font(.headline.bold())
-                    .foregroundColor(isUnlocked ? Color(hex: "1a1a1a") : Color.gray)
+                    .foregroundColor(isUnlocked ? GameColors.darkText : .gray)
                 
                 Text("\(tier.baseWool.formatNumber()) wool/sec each")
                     .font(.caption)
-                    .foregroundColor(Color(hex: "333333"))
+                    .foregroundColor(GameColors.mediumText)
                 
                 if count > 0 {
-                    Text("Owned: \(count)")
-                        .font(.caption.bold())
-                        .foregroundColor(.blue)
+                    HStack(spacing: 4) {
+                        Text("Owned: \(count)")
+                            .font(.caption.bold())
+                            .foregroundColor(.blue)
+                        Text("(\((tier.baseWool * Double(count)).formatNumber())/sec)")
+                            .font(.caption)
+                            .foregroundColor(GameColors.springGreen)
+                    }
                 }
                 
                 if !isUnlocked, let reqTier = tier.requirementTier {
@@ -70,7 +232,7 @@ struct SheepTierRow: View {
                     let currentCount = gameManager.gameState.sheepCounts[reqTier] ?? 0
                     Text("Requires \(reqCount) \(reqTier) sheep (\(currentCount)/\(reqCount))")
                         .font(.caption)
-                        .foregroundColor(Color(hex: "8B4513"))
+                        .foregroundColor(GameColors.brown)
                 }
             }
             
@@ -89,9 +251,10 @@ struct SheepTierRow: View {
                 .foregroundColor(.white)
                 .padding(.horizontal, 16)
                 .padding(.vertical, 10)
-                .background(canAfford ? Color(hex: "228B22") : Color.gray.opacity(0.5))
+                .background(canAfford ? GameColors.springGreen : Color.gray.opacity(0.5))
                 .cornerRadius(8)
             }
+            .buttonStyle(BounceButtonStyle())
             .disabled(!canAfford)
         }
         .padding()
@@ -101,12 +264,13 @@ struct SheepTierRow: View {
         )
         .overlay(
             RoundedRectangle(cornerRadius: 12)
-                .stroke(canAfford ? Color(hex: "32CD32") : Color.gray, lineWidth: canAfford ? 3 : 2)
+                .stroke(canAfford ? GameColors.limeGreen : Color.gray, lineWidth: canAfford ? 3 : 2)
         )
         .opacity(isUnlocked ? 1.0 : 0.6)
     }
 }
 
+// MARK: - Upgrades View
 struct UpgradesView: View {
     @ObservedObject var gameManager: GameManager
     
@@ -115,7 +279,7 @@ struct UpgradesView: View {
             VStack(spacing: 12) {
                 Text("🔧 Farm Upgrades")
                     .font(.title3.bold())
-                    .foregroundColor(Color(hex: "2F4F4F"))
+                    .foregroundColor(GameColors.darkGreen)
                     .padding()
                 
                 ForEach(Upgrade.allUpgrades) { upgrade in
@@ -153,24 +317,39 @@ struct UpgradeRow: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(upgrade.name)
                         .font(.headline.bold())
-                        .foregroundColor(Color(hex: "1a1a1a"))
+                        .foregroundColor(GameColors.darkText)
                     
                     Text(upgrade.description)
                         .font(.caption)
-                        .foregroundColor(Color(hex: "333333"))
+                        .foregroundColor(GameColors.mediumText)
                     
                     HStack {
-                        Text("Level: \(currentLevel)/\(upgrade.maxLevel)")
-                            .font(.caption.bold())
-                            .foregroundColor(.blue)
-                        
-                        if !isMaxLevel {
-                            Text("•")
-                                .foregroundColor(Color(hex: "333333"))
-                            Text("Next: \(cost.formatCurrency())")
-                                .font(.caption)
-                                .foregroundColor(Color(hex: "333333"))
+                        // Progress bar
+                        GeometryReader { geometry in
+                            ZStack(alignment: .leading) {
+                                Rectangle()
+                                    .fill(Color.gray.opacity(0.2))
+                                    .frame(height: 8)
+                                    .cornerRadius(4)
+                                
+                                Rectangle()
+                                    .fill(isMaxLevel ? GameColors.springGreen : GameColors.steelBlue)
+                                    .frame(width: geometry.size.width * (Double(currentLevel) / Double(upgrade.maxLevel)), height: 8)
+                                    .cornerRadius(4)
+                            }
                         }
+                        .frame(height: 8)
+                        
+                        Text("\(currentLevel)/\(upgrade.maxLevel)")
+                            .font(.caption.bold())
+                            .foregroundColor(isMaxLevel ? GameColors.springGreen : .blue)
+                            .frame(width: 50)
+                    }
+                    
+                    if !isMaxLevel {
+                        Text("Next: \(cost.formatCurrency())")
+                            .font(.caption)
+                            .foregroundColor(GameColors.mediumText)
                     }
                 }
                 
@@ -185,9 +364,10 @@ struct UpgradeRow: View {
                             .foregroundColor(.white)
                             .padding(.horizontal, 12)
                             .padding(.vertical, 8)
-                            .background(canAfford ? Color(hex: "4682B4") : Color.gray)
+                            .background(canAfford ? GameColors.steelBlue : Color.gray)
                             .cornerRadius(8)
                     }
+                    .buttonStyle(BounceButtonStyle())
                     .disabled(!canAfford)
                 } else {
                     Text("MAX")
@@ -195,7 +375,7 @@ struct UpgradeRow: View {
                         .foregroundColor(.white)
                         .padding(.horizontal, 12)
                         .padding(.vertical, 8)
-                        .background(Color(hex: "32CD32"))
+                        .background(GameColors.limeGreen)
                         .cornerRadius(8)
                 }
             }
@@ -212,6 +392,7 @@ struct UpgradeRow: View {
     }
 }
 
+// MARK: - Settings View
 struct SettingsView: View {
     @ObservedObject var gameManager: GameManager
     @Binding var isPresented: Bool
@@ -243,6 +424,20 @@ struct SettingsView: View {
                         Text("Total Clicks")
                         Spacer()
                         Text("\(gameManager.gameState.totalClicks)")
+                            .foregroundColor(.secondary)
+                    }
+                    
+                    HStack {
+                        Text("Total Wool Earned")
+                        Spacer()
+                        Text(gameManager.gameState.totalWoolEarned.formatNumber())
+                            .foregroundColor(.secondary)
+                    }
+                    
+                    HStack {
+                        Text("Achievements")
+                        Spacer()
+                        Text("\(gameManager.gameState.unlockedAchievements.count)/\(Achievement.allAchievements.count)")
                             .foregroundColor(.secondary)
                     }
                 }
@@ -305,7 +500,7 @@ struct SettingsView: View {
                     isPresented = false
                 }
             } message: {
-                Text("Are you sure? This will delete all progress!")
+                Text("Are you sure? This will delete all progress and achievements!")
             }
             .sheet(isPresented: $showExport) {
                 ExportView(saveData: exportText)

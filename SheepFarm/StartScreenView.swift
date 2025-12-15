@@ -7,7 +7,7 @@ struct StartScreenView: View {
     
     var body: some View {
         ZStack {
-            LinearGradient(colors: [Color(hex: "87CEEB"), Color(hex: "E0F6FF"), Color(hex: "98FB98")],
+            LinearGradient(colors: [GameColors.skyBlue, GameColors.lightSky, GameColors.grass],
                           startPoint: .topLeading,
                           endPoint: .bottomTrailing)
                 .ignoresSafeArea()
@@ -17,13 +17,13 @@ struct StartScreenView: View {
                     VStack(spacing: 20) {
                         Text("🐑 Choose Your Farm Location 🐑")
                             .font(.system(size: 28, weight: .bold))
-                            .foregroundColor(Color(hex: "2c5f2d"))
+                            .foregroundColor(GameColors.forestGreen)
                             .multilineTextAlignment(.center)
                             .padding()
                         
                         Text("Fjallabær Sheep Farm")
                             .font(.title2.bold())
-                            .foregroundColor(Color(hex: "2F4F4F"))
+                            .foregroundColor(GameColors.darkGreen)
                         
                         // Regions
                         VStack(spacing: 15) {
@@ -45,37 +45,37 @@ struct StartScreenView: View {
                             VStack(spacing: 12) {
                                 Text("\(region.name) - \(region.difficulty)")
                                     .font(.title3.bold())
-                                    .foregroundColor(Color(hex: "2c5f2d"))
+                                    .foregroundColor(GameColors.forestGreen)
                                 
                                 Text(region.description)
                                     .font(.body)
-                                    .foregroundColor(Color(hex: "2F4F4F"))
+                                    .foregroundColor(GameColors.darkGreen)
                                     .multilineTextAlignment(.center)
                                 
                                 VStack(spacing: 8) {
                                     HStack {
                                         Text("Starting Currency:")
-                                            .foregroundColor(Color(hex: "1a1a1a"))
+                                            .foregroundColor(GameColors.darkText)
                                         Spacer()
                                         Text("\(Int(region.startingCurrency)) kr")
                                             .bold()
-                                            .foregroundColor(Color(hex: "000000"))
+                                            .foregroundColor(.black)
                                     }
                                     HStack {
                                         Text("Weather Bonus:")
-                                            .foregroundColor(Color(hex: "1a1a1a"))
+                                            .foregroundColor(GameColors.darkText)
                                         Spacer()
                                         Text("×\(String(format: "%.1f", region.weatherBonus))")
                                             .bold()
-                                            .foregroundColor(Color(hex: "000000"))
+                                            .foregroundColor(.black)
                                     }
                                     HStack {
                                         Text("Production Bonus:")
-                                            .foregroundColor(Color(hex: "1a1a1a"))
+                                            .foregroundColor(GameColors.darkText)
                                         Spacer()
                                         Text("×\(String(format: "%.1f", region.productionBonus))")
                                             .bold()
-                                            .foregroundColor(Color(hex: "000000"))
+                                            .foregroundColor(.black)
                                     }
                                 }
                                 .font(.subheadline)
@@ -83,17 +83,24 @@ struct StartScreenView: View {
                                 .background(Color.white)
                                 .cornerRadius(10)
                                 
-                                // Name input - Fixed with white text
-                                TextField("Enter your name", text: $farmerName)
-                                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                                    .foregroundColor(.white)
-                                    .accentColor(.white)
-                                    .padding(.horizontal)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 8)
-                                            .stroke(Color.white.opacity(0.5), lineWidth: 2)
-                                            .padding(.horizontal)
-                                    )
+                                // Name input - FIXED: Dark text on white background
+                                VStack(alignment: .leading, spacing: 8) {
+                                    Text("Your Name:")
+                                        .font(.subheadline.bold())
+                                        .foregroundColor(GameColors.darkGreen)
+                                    
+                                    TextField("Enter your name", text: $farmerName)
+                                        .textFieldStyle(.roundedBorder)
+                                        .padding(.horizontal)
+                                        .padding(.vertical, 8)
+                                        .background(Color.white)
+                                        .cornerRadius(8)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 8)
+                                                .stroke(GameColors.darkGreen, lineWidth: 2)
+                                        )
+                                }
+                                .padding(.horizontal)
                                 
                                 // Start button
                                 Button(action: {
@@ -106,15 +113,17 @@ struct StartScreenView: View {
                                         .foregroundColor(.white)
                                         .frame(maxWidth: .infinity)
                                         .padding()
-                                        .background(farmerName.isEmpty ? Color.gray : Color(hex: "228b22"))
+                                        .background(farmerName.isEmpty ? Color.gray : GameColors.springGreen)
                                         .cornerRadius(10)
                                 }
+                                .buttonStyle(BounceButtonStyle())
                                 .disabled(farmerName.isEmpty)
                                 .padding(.horizontal)
                             }
                             .padding()
-                            .background(Color(hex: "f5f5dc"))
+                            .background(GameColors.beige)
                             .cornerRadius(15)
+                            .shadow(radius: 5)
                             .padding()
                             .id("regionDetails")
                         }
@@ -147,10 +156,10 @@ struct RegionButton: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(region.name)
                         .font(.headline.bold())
-                        .foregroundColor(Color(hex: "1a1a1a"))
+                        .foregroundColor(GameColors.darkText)
                     Text(region.difficulty)
                         .font(.subheadline.bold())
-                        .foregroundColor(Color(hex: "333333"))
+                        .foregroundColor(GameColors.mediumText)
                 }
                 Spacer()
                 Circle()
@@ -164,34 +173,8 @@ struct RegionButton: View {
                 RoundedRectangle(cornerRadius: 12)
                     .stroke(isSelected ? Color.blue : Color.clear, lineWidth: 3)
             )
+            .shadow(color: isSelected ? .blue.opacity(0.3) : .clear, radius: 8)
         }
-    }
-}
-
-// Color extension for hex colors
-extension Color {
-    init(hex: String) {
-        let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
-        var int: UInt64 = 0
-        Scanner(string: hex).scanHexInt64(&int)
-        let a, r, g, b: UInt64
-        switch hex.count {
-        case 3: // RGB (12-bit)
-            (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
-        case 6: // RGB (24-bit)
-            (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
-        case 8: // ARGB (32-bit)
-            (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
-        default:
-            (a, r, g, b) = (1, 1, 1, 0)
-        }
-
-        self.init(
-            .sRGB,
-            red: Double(r) / 255,
-            green: Double(g) / 255,
-            blue:  Double(b) / 255,
-            opacity: Double(a) / 255
-        )
+        .buttonStyle(BounceButtonStyle())
     }
 }
