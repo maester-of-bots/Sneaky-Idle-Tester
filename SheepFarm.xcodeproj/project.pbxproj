@@ -7,32 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		001 /* SheepFarmApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002 /* SheepFarmApp.swift */; };
-		003 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004 /* ContentView.swift */; };
-		005 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006 /* Models.swift */; };
-		007 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008 /* GameManager.swift */; };
-		009 /* StartScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010 /* StartScreenView.swift */; };
-		011 /* MainGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012 /* MainGameView.swift */; };
-		013 /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014 /* Views.swift */; };
-		015 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016 /* Utilities.swift */; };
-		031 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 030 /* Assets.xcassets */; };
+		A001 /* SheepFarmApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B002 /* SheepFarmApp.swift */; };
+		A003 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B004 /* ContentView.swift */; };
+		A005 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = B006 /* Models.swift */; };
+		A007 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008 /* GameManager.swift */; };
+		A009 /* StartScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B010 /* StartScreenView.swift */; };
+		A011 /* MainGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B012 /* MainGameView.swift */; };
+		A013 /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014 /* Views.swift */; };
+		A015 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = B016 /* Utilities.swift */; };
+		A031 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B030 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		017 /* SheepFarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SheepFarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		002 /* SheepFarmApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheepFarmApp.swift; sourceTree = "<group>"; };
-		004 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		006 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
-		008 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
-		010 /* StartScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenView.swift; sourceTree = "<group>"; };
-		012 /* MainGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGameView.swift; sourceTree = "<group>"; };
-		014 /* Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
-		016 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		030 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C017 /* SheepFarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SheepFarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B002 /* SheepFarmApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheepFarmApp.swift; sourceTree = "<group>"; };
+		B004 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B006 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		B008 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
+		B010 /* StartScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenView.swift; sourceTree = "<group>"; };
+		B012 /* MainGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGameView.swift; sourceTree = "<group>"; };
+		B014 /* Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
+		B016 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		B030 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		018 /* Frameworks */ = {
+		D018 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -42,34 +42,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		019 = {
+		E019 = {
 			isa = PBXGroup;
 			children = (
-				020 /* SheepFarm */,
-				021 /* Products */,
+				E020 /* SheepFarm */,
+				E021 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		020 /* SheepFarm */ = {
+		E020 /* SheepFarm */ = {
 			isa = PBXGroup;
 			children = (
-				002 /* SheepFarmApp.swift */,
-				004 /* ContentView.swift */,
-				006 /* Models.swift */,
-				008 /* GameManager.swift */,
-				010 /* StartScreenView.swift */,
-				012 /* MainGameView.swift */,
-				014 /* Views.swift */,
-				016 /* Utilities.swift */,
-				030 /* Assets.xcassets */,
+				B002 /* SheepFarmApp.swift */,
+				B004 /* ContentView.swift */,
+				B006 /* Models.swift */,
+				B008 /* GameManager.swift */,
+				B010 /* StartScreenView.swift */,
+				B012 /* MainGameView.swift */,
+				B014 /* Views.swift */,
+				B016 /* Utilities.swift */,
+				B030 /* Assets.xcassets */,
 			);
 			path = SheepFarm;
 			sourceTree = "<group>";
 		};
-		021 /* Products */ = {
+		E021 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				017 /* SheepFarm.app */,
+				C017 /* SheepFarm.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -77,13 +77,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		022 /* SheepFarm */ = {
+		F022 /* SheepFarm */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 023 /* Build configuration list for PBXNativeTarget "SheepFarm" */;
+			buildConfigurationList = F023 /* Build configuration list for PBXNativeTarget "SheepFarm" */;
 			buildPhases = (
-				024 /* Sources */,
-				018 /* Frameworks */,
-				025 /* Resources */,
+				F024 /* Sources */,
+				D018 /* Frameworks */,
+				F025 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -91,25 +91,25 @@
 			);
 			name = SheepFarm;
 			productName = SheepFarm;
-			productReference = 017 /* SheepFarm.app */;
+			productReference = C017 /* SheepFarm.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		026 /* Project object */ = {
+		G026 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
-					022 = {
+					F022 = {
 						CreatedOnToolsVersion = 15.0;
 					};
 				};
 			};
-			buildConfigurationList = 027 /* Build configuration list for PBXProject "SheepFarm" */;
+			buildConfigurationList = G027 /* Build configuration list for PBXProject "SheepFarm" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -117,47 +117,47 @@
 				en,
 				Base,
 			);
-			mainGroup = 019;
-			productRefGroup = 021 /* Products */;
+			mainGroup = E019;
+			productRefGroup = E021 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				022 /* SheepFarm */,
+				F022 /* SheepFarm */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		025 /* Resources */ = {
+		F025 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				031 /* Assets.xcassets in Resources */,
+				A031 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		024 /* Sources */ = {
+		F024 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				003 /* ContentView.swift in Sources */,
-				001 /* SheepFarmApp.swift in Sources */,
-				005 /* Models.swift in Sources */,
-				007 /* GameManager.swift in Sources */,
-				009 /* StartScreenView.swift in Sources */,
-				011 /* MainGameView.swift in Sources */,
-				013 /* Views.swift in Sources */,
-				015 /* Utilities.swift in Sources */,
+				A003 /* ContentView.swift in Sources */,
+				A001 /* SheepFarmApp.swift in Sources */,
+				A005 /* Models.swift in Sources */,
+				A007 /* GameManager.swift in Sources */,
+				A009 /* StartScreenView.swift in Sources */,
+				A011 /* MainGameView.swift in Sources */,
+				A013 /* Views.swift in Sources */,
+				A015 /* Utilities.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		028 /* Debug */ = {
+		H028 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -220,7 +220,7 @@
 			};
 			name = Debug;
 		};
-		029 /* Release */ = {
+		H029 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -276,7 +276,7 @@
 			};
 			name = Release;
 		};
-		030 /* Debug */ = {
+		H030 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -305,7 +305,7 @@
 			};
 			name = Debug;
 		};
-		031 /* Release */ = {
+		H031 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -337,25 +337,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		023 /* Build configuration list for PBXNativeTarget "SheepFarm" */ = {
+		F023 /* Build configuration list for PBXNativeTarget "SheepFarm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				030 /* Debug */,
-				031 /* Release */,
+				H030 /* Debug */,
+				H031 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		027 /* Build configuration list for PBXProject "SheepFarm" */ = {
+		G027 /* Build configuration list for PBXProject "SheepFarm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				028 /* Debug */,
-				029 /* Release */,
+				H028 /* Debug */,
+				H029 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 026 /* Project object */;
+	rootObject = G026 /* Project object */;
 }
