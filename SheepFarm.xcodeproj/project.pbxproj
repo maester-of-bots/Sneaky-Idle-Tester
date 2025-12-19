@@ -3,36 +3,34 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A001 /* SheepFarmApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B002 /* SheepFarmApp.swift */; };
-		A003 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B004 /* ContentView.swift */; };
-		A005 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = B006 /* Models.swift */; };
-		A007 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008 /* GameManager.swift */; };
-		A009 /* StartScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B010 /* StartScreenView.swift */; };
-		A011 /* MainGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B012 /* MainGameView.swift */; };
-		A013 /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014 /* Views.swift */; };
-		A015 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = B016 /* Utilities.swift */; };
-		A031 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B030 /* Assets.xcassets */; };
+		AA0000000000000000000001 /* FjallabærSheepFarmApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000001 /* FjallabærSheepFarmApp.swift */; };
+		AA0000000000000000000002 /* AppFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000002 /* AppFlowView.swift */; };
+		AA0000000000000000000003 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000003 /* SplashScreen.swift */; };
+		AA0000000000000000000004 /* LoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000004 /* LoadingScreen.swift */; };
+		AA0000000000000000000005 /* StartMenuScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000005 /* StartMenuScreen.swift */; };
+		AA0000000000000000000006 /* NewFarmScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000006 /* NewFarmScreen.swift */; };
+		AA0000000000000000000007 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000007 /* GameView.swift */; };
+		AA0000000000000000000008 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000008 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C017 /* SheepFarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SheepFarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B002 /* SheepFarmApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheepFarmApp.swift; sourceTree = "<group>"; };
-		B004 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		B006 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
-		B008 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
-		B010 /* StartScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenView.swift; sourceTree = "<group>"; };
-		B012 /* MainGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGameView.swift; sourceTree = "<group>"; };
-		B014 /* Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
-		B016 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		B030 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BB0000000000000000000001 /* FjallabærSheepFarmApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FjallabærSheepFarmApp.swift"; sourceTree = "<group>"; };
+		BB0000000000000000000002 /* AppFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowView.swift; sourceTree = "<group>"; };
+		BB0000000000000000000003 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		BB0000000000000000000004 /* LoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreen.swift; sourceTree = "<group>"; };
+		BB0000000000000000000005 /* StartMenuScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartMenuScreen.swift; sourceTree = "<group>"; };
+		BB0000000000000000000006 /* NewFarmScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFarmScreen.swift; sourceTree = "<group>"; };
+		BB0000000000000000000007 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		BB0000000000000000000008 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CC0000000000000000000001 /* SheepFarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SheepFarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		D018 /* Frameworks */ = {
+		DD0000000000000000000001 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -42,122 +40,195 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E019 = {
+		EE0000000000000000000001 = {
 			isa = PBXGroup;
 			children = (
-				E020 /* SheepFarm */,
-				E021 /* Products */,
+				EE0000000000000000000002 /* SheepFarm */,
+				EE0000000000000000000003 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		E020 /* SheepFarm */ = {
+		EE0000000000000000000002 /* SheepFarm */ = {
 			isa = PBXGroup;
 			children = (
-				B002 /* SheepFarmApp.swift */,
-				B004 /* ContentView.swift */,
-				B006 /* Models.swift */,
-				B008 /* GameManager.swift */,
-				B010 /* StartScreenView.swift */,
-				B012 /* MainGameView.swift */,
-				B014 /* Views.swift */,
-				B016 /* Utilities.swift */,
-				B030 /* Assets.xcassets */,
+				BB0000000000000000000001 /* FjallabærSheepFarmApp.swift */,
+				BB0000000000000000000002 /* AppFlowView.swift */,
+				EE0000000000000000000004 /* Screens */,
+				BB0000000000000000000008 /* Assets.xcassets */,
 			);
 			path = SheepFarm;
 			sourceTree = "<group>";
 		};
-		E021 /* Products */ = {
+		EE0000000000000000000003 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C017 /* SheepFarm.app */,
+				CC0000000000000000000001 /* SheepFarm.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		EE0000000000000000000004 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				BB0000000000000000000003 /* SplashScreen.swift */,
+				BB0000000000000000000004 /* LoadingScreen.swift */,
+				BB0000000000000000000005 /* StartMenuScreen.swift */,
+				BB0000000000000000000006 /* NewFarmScreen.swift */,
+				BB0000000000000000000007 /* GameView.swift */,
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F022 /* SheepFarm */ = {
+		FF0000000000000000000001 /* SheepFarm */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F023 /* Build configuration list for PBXNativeTarget "SheepFarm" */;
+			buildConfigurationList = FF0000000000000000000002 /* Build configuration list for PBXNativeTarget "SheepFarm" */;
 			buildPhases = (
-				F024 /* Sources */,
-				D018 /* Frameworks */,
-				F025 /* Resources */,
+				DD0000000000000000000002 /* Sources */,
+				DD0000000000000000000001 /* Frameworks */,
+				DD0000000000000000000003 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = SheepFarm;
+			packageProductDependencies = (
+			);
 			productName = SheepFarm;
-			productReference = C017 /* SheepFarm.app */;
+			productReference = CC0000000000000000000001 /* SheepFarm.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		G026 /* Project object */ = {
+		GG0000000000000000000001 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1500;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
-					F022 = {
-						CreatedOnToolsVersion = 15.0;
+					FF0000000000000000000001 = {
+						CreatedOnToolsVersion = 16.0;
 					};
 				};
 			};
-			buildConfigurationList = G027 /* Build configuration list for PBXProject "SheepFarm" */;
-			compatibilityVersion = "Xcode 14.0";
+			buildConfigurationList = GG0000000000000000000002 /* Build configuration list for PBXProject "SheepFarm" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = E019;
-			productRefGroup = E021 /* Products */;
+			mainGroup = EE0000000000000000000001;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = EE0000000000000000000003 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F022 /* SheepFarm */,
+				FF0000000000000000000001 /* SheepFarm */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		F025 /* Resources */ = {
+		DD0000000000000000000003 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A031 /* Assets.xcassets in Resources */,
+				AA0000000000000000000008 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		F024 /* Sources */ = {
+		DD0000000000000000000002 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A003 /* ContentView.swift in Sources */,
-				A001 /* SheepFarmApp.swift in Sources */,
-				A005 /* Models.swift in Sources */,
-				A007 /* GameManager.swift in Sources */,
-				A009 /* StartScreenView.swift in Sources */,
-				A011 /* MainGameView.swift in Sources */,
-				A013 /* Views.swift in Sources */,
-				A015 /* Utilities.swift in Sources */,
+				AA0000000000000000000001 /* FjallabærSheepFarmApp.swift in Sources */,
+				AA0000000000000000000002 /* AppFlowView.swift in Sources */,
+				AA0000000000000000000003 /* SplashScreen.swift in Sources */,
+				AA0000000000000000000004 /* LoadingScreen.swift in Sources */,
+				AA0000000000000000000005 /* StartMenuScreen.swift in Sources */,
+				AA0000000000000000000006 /* NewFarmScreen.swift in Sources */,
+				AA0000000000000000000007 /* GameView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		H028 /* Debug */ = {
+		HH0000000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Fjallabær Sheep Farm";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tgsentertainment.sheepfarm;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		HH0000000000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Fjallabær Sheep Farm";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tgsentertainment.sheepfarm;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		HH0000000000000000000003 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -220,7 +291,7 @@
 			};
 			name = Debug;
 		};
-		H029 /* Release */ = {
+		HH0000000000000000000004 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -276,86 +347,28 @@
 			};
 			name = Release;
 		};
-		H030 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.yourname.SheepFarm;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		H031 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.yourname.SheepFarm;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F023 /* Build configuration list for PBXNativeTarget "SheepFarm" */ = {
+		FF0000000000000000000002 /* Build configuration list for PBXNativeTarget "SheepFarm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				H030 /* Debug */,
-				H031 /* Release */,
+				HH0000000000000000000001 /* Debug */,
+				HH0000000000000000000002 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		G027 /* Build configuration list for PBXProject "SheepFarm" */ = {
+		GG0000000000000000000002 /* Build configuration list for PBXProject "SheepFarm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				H028 /* Debug */,
-				H029 /* Release */,
+				HH0000000000000000000003 /* Debug */,
+				HH0000000000000000000004 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = G026 /* Project object */;
+	rootObject = GG0000000000000000000001 /* Project object */;
 }
