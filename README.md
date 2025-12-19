@@ -21,9 +21,17 @@ An Icelandic idle farming game converted from web to iOS using SwiftUI!
 - Better achievement notifications
 - Improved UI polish and animations
 
-See [IMPROVEMENTS.md](IMPROVEMENTS.md) for detailed change log.
-
 ---
+
+# Generative Description
+
+- The app opens to a solid color background - cloudy sky gray.  A (Basic, placeholder) logo is in the middle of the screen, and underneath the words "TGS Entertainment"
+- After 2 seconds, this screen goes away and is replaced with a basic loading icon that will move / turn like a loading icon should, with the large words "Loading" pulsing in and out underneath.
+- After 5 seconds, this gives way to the start menu screen.  The start menu screen contains the name of the game (Placeholder for now) Fjallabær Sheep Farm.  It displays a rectangle shape that goes from just below the text to just above the bottom of the screen.  There is a rounnded rectangular button underneath the rectangle that says "New Farm".  if pressed, it takes the user to the New Farm screen.  If there are saved farms, each one will be a rectangular entry in the larger rectangle.  If pressed, loads the user's farm
+- New Farm screen:
+
+
+___
 
 ## Features
 
