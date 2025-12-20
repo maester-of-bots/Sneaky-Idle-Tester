@@ -10,7 +10,7 @@ enum AppState {
 
 struct AppFlowView: View {
     @State private var currentState: AppState = .splash
-    @State private var selectedFarmID: UUID?
+    @StateObject private var gameManager = GameManager()
     
     var body: some View {
         ZStack {
@@ -30,7 +30,12 @@ struct AppFlowView: View {
                     .onAppear {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
                             withAnimation {
-                                currentState = .startMenu
+                                // Check if game already exists
+                                if UserDefaults.standard.data(forKey: "gameState") != nil {
+                                    currentState = .playingGame
+                                } else {
+                                    currentState = .startMenu
+                                }
                             }
                         }
                     }
@@ -43,7 +48,6 @@ struct AppFlowView: View {
                         }
                     },
                     onLoadFarm: { farmID in
-                        selectedFarmID = farmID
                         withAnimation {
                             currentState = .playingGame
                         }
@@ -52,8 +56,8 @@ struct AppFlowView: View {
                 
             case .newFarm:
                 NewFarmScreen(
-                    onFarmCreated: { farmID in
-                        selectedFarmID = farmID
+                    onFarmCreated: { region in
+                        gameManager.startGame(farmerName: region.0, region: region.1)
                         withAnimation {
                             currentState = .playingGame
                         }
@@ -66,9 +70,11 @@ struct AppFlowView: View {
                 )
                 
             case .playingGame:
-                GameView(farmID: selectedFarmID ?? UUID())
+                GameView(farmID: UUID())
+                    .environmentObject(gameManager)
             }
         }
         .animation(.easeInOut(duration: 0.3), value: currentState)
     }
 }
+

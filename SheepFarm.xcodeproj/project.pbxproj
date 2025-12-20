@@ -15,6 +15,9 @@
 		AA0000000000000000000006 /* NewFarmScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000006 /* NewFarmScreen.swift */; };
 		AA0000000000000000000007 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000007 /* GameView.swift */; };
 		AA0000000000000000000008 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000008 /* Assets.xcassets */; };
+		AA0000000000000000000009 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000009 /* Models.swift */; };
+		AA0000000000000000000010 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000010 /* GameManager.swift */; };
+		AA0000000000000000000011 /* UpgradesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000011 /* UpgradesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		BB0000000000000000000006 /* NewFarmScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFarmScreen.swift; sourceTree = "<group>"; };
 		BB0000000000000000000007 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		BB0000000000000000000008 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BB0000000000000000000009 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		BB0000000000000000000010 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
+		BB0000000000000000000011 /* UpgradesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradesView.swift; sourceTree = "<group>"; };
 		CC0000000000000000000001 /* SheepFarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SheepFarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -53,6 +59,8 @@
 			children = (
 				BB0000000000000000000001 /* FjallabærSheepFarmApp.swift */,
 				BB0000000000000000000002 /* AppFlowView.swift */,
+				BB0000000000000000000009 /* Models.swift */,
+				BB0000000000000000000010 /* GameManager.swift */,
 				EE0000000000000000000004 /* Screens */,
 				BB0000000000000000000008 /* Assets.xcassets */,
 			);
@@ -75,6 +83,7 @@
 				BB0000000000000000000005 /* StartMenuScreen.swift */,
 				BB0000000000000000000006 /* NewFarmScreen.swift */,
 				BB0000000000000000000007 /* GameView.swift */,
+				BB0000000000000000000011 /* UpgradesView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -153,11 +162,14 @@
 			files = (
 				AA0000000000000000000001 /* FjallabærSheepFarmApp.swift in Sources */,
 				AA0000000000000000000002 /* AppFlowView.swift in Sources */,
+				AA0000000000000000000009 /* Models.swift in Sources */,
+				AA0000000000000000000010 /* GameManager.swift in Sources */,
 				AA0000000000000000000003 /* SplashScreen.swift in Sources */,
 				AA0000000000000000000004 /* LoadingScreen.swift in Sources */,
 				AA0000000000000000000005 /* StartMenuScreen.swift in Sources */,
 				AA0000000000000000000006 /* NewFarmScreen.swift in Sources */,
 				AA0000000000000000000007 /* GameView.swift in Sources */,
+				AA0000000000000000000011 /* UpgradesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
