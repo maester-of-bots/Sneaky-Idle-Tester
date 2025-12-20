@@ -123,40 +123,40 @@ struct TopBar: View {
     var body: some View {
         HStack(spacing: 12) {
             // Kroner Display
-            HStack(spacing: 6) {
+            HStack(spacing: 8) {
                 Text("💰")
-                    .font(.system(size: 18))
-                VStack(alignment: .leading, spacing: 1) {
+                    .font(.system(size: 24))
+                VStack(alignment: .leading, spacing: 2) {
                     Text("Krónur")
-                        .font(.system(size: 9))
-                        .foregroundColor(.white.opacity(0.8))
+                        .font(.system(size: 11, weight: .medium))
+                        .foregroundColor(.white.opacity(0.9))
                     Text(formatNumber(kroner))
-                        .font(.system(size: 14, weight: .bold))
+                        .font(.system(size: 18, weight: .bold))
                         .foregroundColor(.white)
                 }
             }
-            .padding(.horizontal, 10)
-            .padding(.vertical, 6)
+            .padding(.horizontal, 14)
+            .padding(.vertical, 8)
             .background(
                 RoundedRectangle(cornerRadius: 8)
                     .fill(Color.black.opacity(0.2))
             )
 
             // Special Currency Display
-            HStack(spacing: 6) {
+            HStack(spacing: 8) {
                 Text("⭐")
-                    .font(.system(size: 18))
-                VStack(alignment: .leading, spacing: 1) {
+                    .font(.system(size: 24))
+                VStack(alignment: .leading, spacing: 2) {
                     Text("Special")
-                        .font(.system(size: 9))
-                        .foregroundColor(.white.opacity(0.8))
+                        .font(.system(size: 11, weight: .medium))
+                        .foregroundColor(.white.opacity(0.9))
                     Text("\(specialCurrency)")
-                        .font(.system(size: 14, weight: .bold))
+                        .font(.system(size: 18, weight: .bold))
                         .foregroundColor(.white)
                 }
             }
-            .padding(.horizontal, 10)
-            .padding(.vertical, 6)
+            .padding(.horizontal, 14)
+            .padding(.vertical, 8)
             .background(
                 RoundedRectangle(cornerRadius: 8)
                     .fill(Color.black.opacity(0.2))
@@ -169,10 +169,10 @@ struct TopBar: View {
                 // Settings action
             }) {
                 Image(systemName: "gearshape.fill")
-                    .font(.system(size: 20))
+                    .font(.system(size: 26))
                     .foregroundColor(.white)
             }
-            .padding(.trailing, 10)
+            .padding(.trailing, 14)
         }
         .frame(height: 50)
         .background(Color(red: 0.13, green: 0.54, blue: 0.13)) // Dark green
@@ -272,13 +272,13 @@ struct FarmPathView: View {
                     path.addLine(to: CGPoint(x: x, y: y))
                 }
             }
-            .stroke(Color(red: 0.55, green: 0.27, blue: 0.07), lineWidth: 40) // Brown
+            .stroke(Color(red: 0.55, green: 0.27, blue: 0.07), lineWidth: 50) // Brown
             .opacity(0.6)
 
             // Sheep farms along the path
-            VStack(spacing: 200) {
+            VStack(spacing: 140) {
                 ForEach(Array(stride(from: 0, to: SheepType.allTypes.count, by: 2)), id: \.self) { index in
-                    HStack(spacing: 20) {
+                    HStack(spacing: 35) {
                         // Left sheep farm
                         if index < SheepType.allTypes.count {
                             SheepFarmCard(
@@ -297,7 +297,7 @@ struct FarmPathView: View {
                             )
                         }
                     }
-                    .padding(.horizontal, 10)
+                    .padding(.horizontal, 15)
                 }
             }
             .padding(.top, 50)
@@ -327,9 +327,9 @@ struct SheepFarmCard: View {
         VStack(spacing: 8) {
             // Sheep count owned
             Text("\(gameState.sheepCounts[sheepType.id, default: 0])")
-                .font(.system(size: 22, weight: .bold))
+                .font(.system(size: 14, weight: .bold))
                 .foregroundColor(.white)
-                .frame(width: 55, height: 55)
+                .frame(width: 35, height: 35)
                 .background(
                     Circle()
                         .fill(Color.green.opacity(0.7))
@@ -337,15 +337,15 @@ struct SheepFarmCard: View {
 
             // Sheep emoji
             Text(sheepType.emoji)
-                .font(.system(size: 50))
+                .font(.system(size: 28))
 
             // Sheep name
             Text(sheepType.name)
-                .font(.system(size: 15, weight: .semibold))
+                .font(.system(size: 11, weight: .semibold))
                 .foregroundColor(Color(red: 0.2, green: 0.4, blue: 0.2))
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
-                .frame(height: 38)
+                .frame(height: 28)
 
             // Buy button
             Button(action: {
@@ -353,13 +353,13 @@ struct SheepFarmCard: View {
             }) {
                 VStack(spacing: 4) {
                     Text("+\(buyAmount) \(sheepType.emoji)")
-                        .font(.system(size: 16, weight: .bold))
+                        .font(.system(size: 11, weight: .bold))
                         .foregroundColor(.white)
                     Text("\(Int(totalCost)) kr")
-                        .font(.system(size: 14, weight: .semibold))
+                        .font(.system(size: 10, weight: .semibold))
                         .foregroundColor(.white.opacity(0.9))
                 }
-                .frame(width: 140, height: 50)
+                .frame(width: 95, height: 36)
                 .background(
                     RoundedRectangle(cornerRadius: 12)
                         .fill(canAfford ?
@@ -369,8 +369,8 @@ struct SheepFarmCard: View {
             }
             .disabled(!canAfford)
         }
-        .frame(width: 160, height: 260)
-        .padding()
+        .frame(width: 110, height: 180)
+        .padding(8)
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(Color.white)
