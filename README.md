@@ -30,6 +30,36 @@ An Icelandic idle farming game converted from web to iOS using SwiftUI!
 - After 5 seconds, this gives way to the start menu screen.  The start menu screen contains the name of the game (Placeholder for now) Fjallabær Sheep Farm.  It displays a rectangle shape that goes from just below the text to just above the bottom of the screen.  There is a rounnded rectangular button underneath the rectangle that says "New Farm".  if pressed, it takes the user to the New Farm screen.  If there are saved farms, each one will be a rectangular entry in the larger rectangle.  If pressed, loads the user's farm
 - New Farm screen:
 
+Main Farm UI:
+Two bars, one at the top, one at the bottom, spanning the horizontal length of the screen.  These are maybe 1/16th the vertical length of the screen each.  They are dark gree in background color.  
+The bottom bar contains four circular icons.  One has a golden arrow pointed up, one has a sheep face, one has a robot face, and one has a shopping cart.  This is for upgrades, sheep, automation, and shop respectively.
+The top bar contains a smaller rectangular field taking up about 1/3 of the horizontal width of the top bar.  This is where the total kroner the user has is shown.  There's a second rectangle, about 1/3th the remaining horizontal space, where amount of (placeholder special ingame currency) is located.  Then there's a circular "Settings" gear to the right.
+The remainder of the screen is scrollable up and down.  To *start* with we can say put a winding brown trail that starts from the bottom of the phone and goes up to the top.  On eithe rside there are TWO sheep farms, spaced evenly in each quadrent along the path.  THat's four sheep farm per screen.  There ought to be 10 sheep types initialy, so it'll scroll up to show six more sheep farms, three on each side.  The point of the sheep farms is to primarily purchase sheep, so there should be a button that says +1 (sheep emoji) then KR (price here) below that.  Make it a nice light blue, roundeed rectangle button that takes up about 1/5th the space as the sheep farm.
+If the farmer has enough money, clicking the buy button will buy him a sheep.
+There is also a small rectangular button above the bottom bar, at the right, that lets the user toggle between "x1" and "Max you can afford" aka "Max" for how many sheep to buy.  The buttons to buy sheep should update immediately to reflect.
+
+
+
+
+
+I've updated the code, please refer to the new file.  A couple of changes to make please:
+
+Add three new tiers to Automation Systems.  The first tier (Original) Enables auto-selling raw wool.  The second tier enables auto-processing raw wool.  The third tier enables selling the products.    The fourth tier creates a console under Farm Statistics with an option for each and to turn them on or off.
+
+Come up with five new whimsically farm upgrades, like Icelandic elves or some shit like that.
+
+Update the SHeep Breeds available area.   Make it so that it only shows two tiers of sheep that are unavailable.  Change the Unavailable sheep tier rows to be grayed out all toether.  When a sheep tier is available, make the row 2.5x as big, and in the middle between the text on the left and the buttom on the right, give each tier their own specific pasture where those specific sheep will appear.
+
+Can you update the core aspect of the game?  I would like to change the Sheep button that the user clicks for free sheep, to a "Shear your Sheep" button to get wool.  Additionally, I'd like the normal free sheep to be updated to cost 10kr.
+
+Lastly, I want scaling costs for the sheep as you buy them.  Use your best judgement for the mechanics of the game, but I'm thinking at least 2x-5x cost increase.  But again, up to your best judgement.
+
+    At the start screen with "Choose your farm location", it should scroll to the bottom to show the description automatically
+    The "Enter your name" text needs to be updated to be white, it's not legible now
+    After starting, I bought one sheep. I see the game update that I have production now, but it doesn't make raw wool OR money go up
+    The "Click to shear wool" button doesn't do anything
+    The "Sell raw wool" button doesn't do anything
+    Buying upgrades works, but it isn't updated until I restart the app
 
 ___
 
