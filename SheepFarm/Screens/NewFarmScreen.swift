@@ -61,7 +61,7 @@ struct Region: Identifiable {
 
 // MARK: - New Farm Screen
 struct NewFarmScreen: View {
-    let onFarmCreated: (UUID) -> Void
+    let onFarmCreated: ((String, Region)) -> Void
     let onCancel: () -> Void
 
     @State private var farmerName: String = ""
@@ -215,26 +215,8 @@ struct NewFarmScreen: View {
     }
 
     private func createFarm(region: Region) {
-        let newFarm = SavedFarm(
-            name: farmerName.isEmpty ? "My Farm" : farmerName,
-            lastPlayed: Date(),
-            totalSheep: 0,
-            totalKroner: region.startingCurrency
-        )
-
-        // Save to UserDefaults
-        var savedFarms: [SavedFarm] = []
-        if let data = UserDefaults.standard.data(forKey: "savedFarms"),
-           let decoded = try? JSONDecoder().decode([SavedFarm].self, from: data) {
-            savedFarms = decoded
-        }
-        savedFarms.append(newFarm)
-
-        if let encoded = try? JSONEncoder().encode(savedFarms) {
-            UserDefaults.standard.set(encoded, forKey: "savedFarms")
-        }
-
-        onFarmCreated(newFarm.id)
+        let name = farmerName.isEmpty ? "Farmer" : farmerName
+        onFarmCreated((name, region))
     }
 }
 
