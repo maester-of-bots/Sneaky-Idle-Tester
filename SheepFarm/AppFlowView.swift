@@ -30,7 +30,8 @@ struct AppFlowView: View {
                     .onAppear {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
                             withAnimation {
-                                // Check if game already exists
+                                // If saved game exists, go straight to game
+                                // Otherwise go to start menu
                                 if UserDefaults.standard.data(forKey: "gameState") != nil {
                                     currentState = .playingGame
                                 } else {
@@ -39,7 +40,7 @@ struct AppFlowView: View {
                             }
                         }
                     }
-                
+
             case .startMenu:
                 StartMenuScreen(
                     onNewFarm: {
@@ -47,7 +48,7 @@ struct AppFlowView: View {
                             currentState = .newFarm
                         }
                     },
-                    onLoadFarm: { farmID in
+                    onContinue: {
                         withAnimation {
                             currentState = .playingGame
                         }
