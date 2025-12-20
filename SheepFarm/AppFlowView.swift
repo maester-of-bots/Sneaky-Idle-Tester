@@ -56,8 +56,8 @@ struct AppFlowView: View {
                 
             case .newFarm:
                 NewFarmScreen(
-                    onFarmCreated: { region in
-                        gameManager.startGame(farmerName: region.0, region: region.1)
+                    onFarmCreated: { (farmerName, region) in
+                        gameManager.startGame(farmerName: farmerName, region: region)
                         withAnimation {
                             currentState = .playingGame
                         }
